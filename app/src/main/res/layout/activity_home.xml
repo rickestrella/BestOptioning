@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/homeLayout"
+    android:orientation="vertical"
+    tools:context=".HomeActivity">
+
+    <ImageView
+        android:id="@+id/mainLogo"
+        android:layout_width="match_parent"
+        android:layout_height="240dp"
+        android:background="@drawable/logo_day"
+        android:contentDescription="@string/app_name"
+        android:padding="16dp" />
+
+    <TextView
+        android:id="@+id/main_descriprion"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:justificationMode="inter_word"
+        android:padding="8dp"
+        android:text="I'ts meant to help car buyers decide which car to buy.
+        \nAfter the Required VEHICLE and USAGE information of 2 or more comparable vehicles has been entered, this app will generate numerical indicators for each car to compare their values and reflect which one could be your ..."
+        android:textSize="18sp" />
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/addVehicleMainButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="@string/add_vehicle"
+        android:textSize="16sp" />
+</LinearLayout>

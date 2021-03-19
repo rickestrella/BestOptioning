@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:id="@+id/mainLayout"
+    android:orientation="vertical"
+    tools:context=".MainActivity">
+
+    <LinearLayout
+        android:id="@+id/mainTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:padding="8dp">
+
+        <ImageView
+            android:id="@+id/titleIV"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:layout_marginTop="50dp"
+            android:layout_marginBottom="15dp"
+            android:contentDescription="@string/title"
+            android:scaleType="fitCenter" />
+
+        <ImageView
+            android:id="@+id/subtitleIV"
+            android:layout_width="wrap_content"
+            android:layout_height="25dp"
+            android:contentDescription="@string/subtitle"
+            android:scaleType="fitCenter" />
+    </LinearLayout>
+
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/lottie_splash"
+        android:layout_width="match_parent"
+        android:layout_height="250dp"
+        android:layout_below="@id/mainTitle"
+        android:layout_gravity="center"
+        android:layout_marginTop="75dp"
+        android:scaleType="fitXY"
+        app:lottie_autoPlay="true"
+        app:lottie_fileName="car_plate.json"
+        app:lottie_loop="true" />
+
+    <TextView
+        android:id="@+id/techpigTV"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:textSize="18sp"
+        android:text="@string/madeBy"
+        android:textAlignment="center" />
+
+</RelativeLayout>
