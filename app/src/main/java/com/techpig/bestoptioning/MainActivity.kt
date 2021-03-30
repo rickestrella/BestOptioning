@@ -13,7 +13,8 @@ import android.widget.LinearLayout
 import android.widget.RelativeLayout
 import android.widget.TextView
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : BaseActivity() {
+
     lateinit var fromTop: Animation
 
     override fun onCreate(savedInstanceState: Bundle?) {

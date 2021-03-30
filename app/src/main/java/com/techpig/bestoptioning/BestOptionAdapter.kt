@@ -4,10 +4,14 @@ import android.content.Context
 import android.content.res.Configuration
 import android.graphics.Color
 import android.graphics.Typeface
+import android.text.TextUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.techpig.bestoptioning.ResultFragment.Companion.boBpr
+import com.techpig.bestoptioning.ResultFragment.Companion.boScore
+import com.techpig.bestoptioning.ResultFragment.Companion.boTitle
 import kotlinx.android.synthetic.main.card_item_layout.view.*
 import java.text.DecimalFormat
 import java.util.*
@@ -38,11 +42,14 @@ class BestOptionAdapter(val context: Context, private val items: ArrayList<Vehic
         val item = items[position]
 
         fun formatNumber(number: Float): Float {
-            val df = DecimalFormat("######.####")
+            val df = DecimalFormat("#####.####")
             return df.format(number.toDouble()).toFloat()
         }
 
         holder.cardTitle.text = item.getModelMake()
+        holder.cardTitle.isSelected = true
+        holder.cardTitle.setSingleLine()
+        holder.cardTitle.ellipsize = TextUtils.TruncateAt.MARQUEE
         val cardScoreFourDigits = formatNumber(item.getVu_relation())
         holder.cardScore.text = "$cardScoreFourDigits"
 
@@ -121,17 +128,17 @@ class BestOptionAdapter(val context: Context, private val items: ArrayList<Vehic
         } else {
             when (item.getVu_relation()) {
                 closestV -> {
-                    holder.containerCard.setCardBackgroundColor(Color.parseColor("#1DA000"))
-                    holder.cardTitle.setTextColor(Color.parseColor("#FF9100"))
+                    holder.containerCard.setCardBackgroundColor(Color.parseColor("#348A36"))
+                    holder.cardTitle.setTextColor(Color.parseColor("#FFFFFF"))
                     holder.cardScore.setTextColor(Color.parseColor("#EAEAEA"))
-                    holder.cardScore.typeface = Typeface.defaultFromStyle(Typeface.NORMAL)
+                    holder.cardScore.typeface = Typeface.defaultFromStyle(Typeface.BOLD)
                     holder.containerCard.cardElevation = 12f
                 }
                 else -> {
-                    holder.containerCard.setCardBackgroundColor(Color.parseColor("#AB004D"))
-                    holder.containerCard.setPadding(16,16,16,16)
-                    holder.cardTitle.setTextColor(Color.parseColor("#FFC0D9"))
-                    holder.cardScore.setTextColor(Color.parseColor("#EEDDDD"))
+                    holder.containerCard.setCardBackgroundColor(Color.parseColor("#FFEEB6"))
+                    holder.containerCard.setPadding(16, 16, 16, 16)
+                    holder.cardTitle.setTextColor(Color.parseColor("#000000"))
+                    holder.cardScore.setTextColor(Color.parseColor("#000000"))
                     holder.cardScore.typeface = Typeface.defaultFromStyle(Typeface.NORMAL)
                     holder.containerCard.cardElevation = 5f
                 }

@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.res.Configuration
 import android.graphics.Color
 import android.graphics.Typeface
+import android.text.TextUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -39,8 +40,16 @@ class BestChoiceAdapter(val context: Context, val items: ArrayList<VehicleObject
         val item = items[position]
         // Vehicle Results
 
+        fun formatNumber(number: Float): Float {
+            val df = DecimalFormat("####.####")
+            return df.format(number.toDouble()).toFloat()
+        }
+
         holder.cardTitle.text = item.getModelMake()
-        val cardScoreFourDigits = String.format("%.4f", item.getVin())
+        holder.cardTitle.isSelected = true
+        holder.cardTitle.setSingleLine()
+        holder.cardTitle.ellipsize = TextUtils.TruncateAt.MARQUEE
+        val cardScoreFourDigits = formatNumber(item.getVin()).toString()
         holder.cardScore.text = cardScoreFourDigits
 
         fun highestVin() {
@@ -54,10 +63,6 @@ class BestChoiceAdapter(val context: Context, val items: ArrayList<VehicleObject
         highestVin()
 
         highestV
-
-        val highestVinString = String.format("%.4f", highestV)
-
-
 
         // Best Choice = highest VIN
         // Best bet = lowest UCIN
@@ -81,21 +86,20 @@ class BestChoiceAdapter(val context: Context, val items: ArrayList<VehicleObject
             }
         } else {
             if (item.getVin() == highestV) {
-                holder.containerCard.setCardBackgroundColor(Color.parseColor("#1DA000"))
-                holder.cardTitle.setTextColor(Color.parseColor("#FF9100"))
+                holder.containerCard.setCardBackgroundColor(Color.parseColor("#348A36"))
+                holder.cardTitle.setTextColor(Color.parseColor("#FFFFFF"))
                 holder.cardScore.setTextColor(Color.parseColor("#EAEAEA"))
-                holder.cardScore.typeface = Typeface.defaultFromStyle(Typeface.NORMAL)
-                holder.containerCard.cardElevation = 10f
+                holder.cardScore.typeface = Typeface.defaultFromStyle(Typeface.BOLD)
+                holder.containerCard.cardElevation = 12f
             } else {
-                holder.containerCard.setCardBackgroundColor(Color.parseColor("#AB004D"))
+                holder.containerCard.setCardBackgroundColor(Color.parseColor("#FFEEB6"))
                 holder.containerCard.setPadding(8,8,8,8)
-                holder.cardTitle.setTextColor(Color.parseColor("#FFC0D9"))
-                holder.cardScore.setTextColor(Color.parseColor("#EEDDDD"))
+                holder.cardTitle.setTextColor(Color.parseColor("#000000"))
+                holder.cardScore.setTextColor(Color.parseColor("#000000"))
                 holder.cardScore.typeface = Typeface.defaultFromStyle(Typeface.NORMAL)
                 holder.containerCard.cardElevation = 6f
             }
         }
-
     }
 
     override fun getItemCount(): Int {

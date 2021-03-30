@@ -70,7 +70,7 @@
                                 app:boxBackgroundColor="@color/white"
                                 app:boxStrokeColor="@color/light_grey"
                                 app:endIconMode="clear_text"
-                                app:helperText="Model/Make"
+                                app:helperText="Make/Model"
                                 app:startIconDrawable="@drawable/ic_car">
 
                                 <com.google.android.material.textfield.TextInputEditText
@@ -103,55 +103,53 @@
                                     android:textAlignment="center"
                                     android:textSize="18sp" />
 
-                                <LinearLayout
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:orientation="horizontal">
-
-                                    <com.google.android.material.textfield.TextInputLayout
-                                        android:id="@+id/manufacturingYear"
-                                        style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.Dense"
-                                        android:layout_width="0dp"
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
-                                        android:layout_marginEnd="3dp"
-                                        android:layout_weight="1"
-                                        android:hint="@string/year_example"
-                                        app:boxBackgroundColor="@color/white"
-                                        app:boxStrokeColor="@color/light_grey"
-                                        app:endIconMode="clear_text"
-                                        app:helperText="Manufacturing year"
-                                        app:startIconDrawable="@drawable/ic_calendar">
+                                        android:orientation="horizontal">
 
-                                        <com.google.android.material.textfield.TextInputEditText
-                                            android:layout_width="match_parent"
+                                        <com.google.android.material.textfield.TextInputLayout
+                                            android:id="@+id/manufacturingYear"
+                                            style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.Dense"
+                                            android:layout_width="0dp"
                                             android:layout_height="wrap_content"
-                                            android:clickable="false"
-                                            android:imeOptions="actionNext"
-                                            android:inputType="number"
-                                            android:textSize="18sp" />
-                                    </com.google.android.material.textfield.TextInputLayout>
+                                            android:layout_marginEnd="3dp"
+                                            android:layout_weight="1"
+                                            android:hint="@string/year_example"
+                                            app:boxBackgroundColor="@color/white"
+                                            app:boxStrokeColor="@color/light_grey"
+                                            app:endIconMode="clear_text"
+                                            app:startIconDrawable="@drawable/ic_calendar">
 
-                                    <com.google.android.material.textfield.TextInputLayout
-                                        android:id="@+id/monthPicker"
-                                        style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.Dense.ExposedDropdownMenu"
-                                        android:layout_width="0dp"
-                                        android:layout_height="wrap_content"
-                                        android:layout_marginStart="3dp"
-                                        android:layout_weight="1"
-                                        android:hint="@string/month"
-                                        app:boxBackgroundColor="@color/white"
-                                        app:boxStrokeColor="@color/light_grey">
+                                            <com.google.android.material.textfield.TextInputEditText
+                                                android:layout_width="match_parent"
+                                                android:layout_height="wrap_content"
+                                                android:clickable="false"
+                                                android:imeOptions="actionNext"
+                                                android:inputType="number"
+                                                android:textSize="18sp" />
+                                        </com.google.android.material.textfield.TextInputLayout>
 
-                                        <AutoCompleteTextView
-                                            android:layout_width="match_parent"
-                                            android:layout_height="match_parent"
-                                            android:editable="false"
-                                            android:inputType="none"
-                                            android:text="@string/june"
-                                            android:textAlignment="center"
-                                            android:textSize="16sp" />
-                                    </com.google.android.material.textfield.TextInputLayout>
-                                </LinearLayout>
+                                        <com.google.android.material.textfield.TextInputLayout
+                                            android:id="@+id/monthPicker"
+                                            style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.Dense.ExposedDropdownMenu"
+                                            android:layout_width="0dp"
+                                            android:layout_height="wrap_content"
+                                            android:layout_marginStart="3dp"
+                                            android:layout_weight="1"
+                                            app:boxBackgroundColor="@color/white"
+                                            app:boxStrokeColor="@color/light_grey">
+
+                                            <AutoCompleteTextView
+                                                android:layout_width="match_parent"
+                                                android:layout_height="match_parent"
+                                                android:editable="false"
+                                                android:inputType="none"
+                                                android:text="@string/june"
+                                                android:textAlignment="center"
+                                                android:textSize="16sp" />
+                                        </com.google.android.material.textfield.TextInputLayout>
+                                    </LinearLayout>
 
                                 <TextView
                                     android:id="@+id/monthInfoTV"
@@ -160,7 +158,7 @@
                                     android:layout_marginTop="5dp"
                                     android:layout_marginBottom="25dp"
                                     android:text="@string/default_month"
-                                    android:textSize="15sp" />
+                                    android:textSize="13sp" />
                             </LinearLayout>
 
                             <LinearLayout
@@ -179,11 +177,10 @@
                                         style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.Dense"
                                         android:layout_width="0dp"
                                         android:layout_height="wrap_content"
-                                        android:layout_weight="2"
+                                        android:layout_weight="2.3"
                                         app:boxBackgroundColor="@color/white"
                                         app:boxStrokeColor="@color/light_grey"
                                         app:endIconMode="clear_text"
-                                        app:helperText="Odometer reading"
                                         app:startIconDrawable="@drawable/ic_speed">
 
                                         <com.google.android.material.textfield.TextInputEditText
@@ -193,6 +190,26 @@
                                             android:imeOptions="actionNext"
                                             android:inputType="numberDecimal"
                                             android:textSize="18sp" />
+                                    </com.google.android.material.textfield.TextInputLayout>
+
+                                    <com.google.android.material.textfield.TextInputLayout
+                                        android:id="@+id/unitPicker"
+                                        style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.Dense.ExposedDropdownMenu"
+                                        android:layout_width="0dp"
+                                        android:layout_height="match_parent"
+                                        android:layout_marginStart="3dp"
+                                        android:layout_weight="1"
+                                        app:boxBackgroundColor="@color/white"
+                                        app:boxStrokeColor="@color/light_grey">
+
+                                        <AutoCompleteTextView
+                                            android:layout_width="match_parent"
+                                            android:layout_height="match_parent"
+                                            android:editable="false"
+                                            android:inputType="none"
+                                            android:text="@string/km"
+                                            android:textAlignment="center"
+                                            android:textSize="16sp" />
                                     </com.google.android.material.textfield.TextInputLayout>
 
                                 </LinearLayout>
@@ -205,7 +222,7 @@
                                     android:layout_marginBottom="20dp"
                                     android:text="@string/odometerReading"
                                     android:textAlignment="textStart"
-                                    android:textSize="15sp" />
+                                    android:textSize="13sp" />
 
                                 <RadioGroup
                                     android:layout_width="match_parent"
@@ -320,7 +337,7 @@
                                     android:layout_marginVertical="5dp"
                                     android:text="@string/costs"
                                     android:textAlignment="textStart"
-                                    android:textSize="15sp" />
+                                    android:textSize="13sp" />
                             </LinearLayout>
 
 
@@ -396,7 +413,7 @@
                                 android:layout_marginBottom="30dp"
                                 android:text="@string/mk_year_tv"
                                 android:textAlignment="textStart"
-                                android:textSize="15sp" />
+                                android:textSize="13sp" />
 
                             <LinearLayout
                                 android:layout_width="match_parent"
@@ -432,7 +449,7 @@
                                 android:layout_marginVertical="10dp"
                                 android:text="@string/mk_end_tv"
                                 android:textAlignment="textStart"
-                                android:textSize="15sp" />
+                                android:textSize="13sp" />
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
 

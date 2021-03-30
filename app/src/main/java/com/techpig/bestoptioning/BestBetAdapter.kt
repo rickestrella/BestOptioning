@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.res.Configuration
 import android.graphics.Color
 import android.graphics.Typeface
+import android.text.TextUtils
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -32,11 +33,14 @@ class BestBetAdapter(val context: Context, private val items: ArrayList<VehicleO
         val item = items[position]
 
         fun formatNumber(number: Float): Float {
-            val df = DecimalFormat("######.####")
+            val df = DecimalFormat("####.####")
             return df.format(number.toDouble()).toFloat()
         }
 
         holder.cardTitle.text = item.getModelMake()
+        holder.cardTitle.isSelected = true
+        holder.cardTitle.setSingleLine()
+        holder.cardTitle.ellipsize = TextUtils.TruncateAt.MARQUEE
         val cardScoreFourDigits = formatNumber(item.getUcn())
         holder.cardScore.text = "$cardScoreFourDigits"
 
@@ -54,8 +58,6 @@ class BestBetAdapter(val context: Context, private val items: ArrayList<VehicleO
 
         val bbstr = formatNumber(lowestUcn).toString()
 
-        // TODO EL ESCOGIDO PUEDE TENER LOS COLORES DE BEST OPTIONING (BG: #000000, Title: #FF0000, Score: #FFFFFF)
-
         if ((context.applicationContext!!.resources.configuration.uiMode.and(Configuration.UI_MODE_NIGHT_MASK)) == Configuration.UI_MODE_NIGHT_YES) {
             if (cardScoree == bbstr) {
                 holder.containerCard.setCardBackgroundColor(Color.parseColor("#0E4D00"))
@@ -72,16 +74,16 @@ class BestBetAdapter(val context: Context, private val items: ArrayList<VehicleO
             }
         } else {
             if (cardScoree == bbstr) {
-                holder.containerCard.setCardBackgroundColor(Color.parseColor("#1DA000"))
-                holder.cardTitle.setTextColor(Color.parseColor("#FF9100"))
+                holder.containerCard.setCardBackgroundColor(Color.parseColor("#348A36"))
+                holder.cardTitle.setTextColor(Color.parseColor("#FFFFFF"))
                 holder.cardScore.setTextColor(Color.parseColor("#EAEAEA"))
-                holder.cardScore.typeface = Typeface.defaultFromStyle(Typeface.NORMAL)
-                holder.containerCard.cardElevation = 10f
+                holder.cardScore.typeface = Typeface.defaultFromStyle(Typeface.BOLD)
+                holder.containerCard.cardElevation = 12f
             } else {
-                holder.containerCard.setCardBackgroundColor(Color.parseColor("#AB004D"))
+                holder.containerCard.setCardBackgroundColor(Color.parseColor("#FFEEB6"))
                 holder.containerCard.setPadding(8,8,8,8)
-                holder.cardTitle.setTextColor(Color.parseColor("#FFC0D9"))
-                holder.cardScore.setTextColor(Color.parseColor("#EEDDDD"))
+                holder.cardTitle.setTextColor(Color.parseColor("#000000"))
+                holder.cardScore.setTextColor(Color.parseColor("#000000"))
                 holder.cardScore.typeface = Typeface.defaultFromStyle(Typeface.NORMAL)
                 holder.containerCard.cardElevation = 6f
             }

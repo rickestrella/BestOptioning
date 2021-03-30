@@ -3,28 +3,61 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/homeLayout"
     android:orientation="vertical"
     tools:context=".HomeActivity">
 
-    <ImageView
-        android:id="@+id/mainLogo"
+    <LinearLayout
+        android:id="@+id/mainTitle"
         android:layout_width="match_parent"
-        android:layout_height="240dp"
-        android:background="@drawable/logo_day"
-        android:contentDescription="@string/app_name"
-        android:padding="16dp" />
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="8dp">
+
+        <ImageView
+            android:id="@+id/mainLogo"
+            android:layout_width="match_parent"
+            android:layout_height="130dp"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/car_logo_day"
+            android:contentDescription="@string/app_name"
+            android:scaleType="centerCrop"/>
+
+        <ImageView
+            android:id="@+id/titleIV"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginBottom="10dp"
+            android:contentDescription="@string/title"
+            android:scaleType="fitCenter"
+            android:src="@drawable/title_day"/>
+
+        <ImageView
+            android:id="@+id/subtitleIV"
+            android:layout_width="wrap_content"
+            android:layout_height="25dp"
+            android:layout_marginHorizontal="12dp"
+            android:contentDescription="@string/subtitle"
+            android:scaleType="fitCenter"
+            android:src="@drawable/subtitle_day"/>
+    </LinearLayout>
 
     <TextView
         android:id="@+id/main_descriprion"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
-        android:justificationMode="inter_word"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:textColor="@color/black"
         android:padding="8dp"
-        android:text="I'ts meant to help car buyers decide which car to buy.
+        android:layout_marginHorizontal="2dp"
+        android:lineHeight="20dp"
+        android:text="It's meant to help car buyers decide which car to buy.
         \nAfter the Required VEHICLE and USAGE information of 2 or more comparable vehicles has been entered, this app will generate numerical indicators for each car to compare their values and reflect which one could be your ..."
-        android:textSize="18sp" />
+        android:textSize="16sp" />
     <com.google.android.material.button.MaterialButton
         android:id="@+id/addVehicleMainButton"
         android:layout_width="wrap_content"

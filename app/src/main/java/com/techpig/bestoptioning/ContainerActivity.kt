@@ -8,17 +8,16 @@ import android.net.Uri
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
-import android.view.View
 import android.view.WindowManager
 import android.widget.FrameLayout
 import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.res.ResourcesCompat
+import com.ismaeldivita.chipnavigation.BuildConfig
 import com.ismaeldivita.chipnavigation.ChipNavigationBar
 import com.techpig.bestoptioning.Vehicle.Companion.vehicles
 import kotlin.system.exitProcess
 
-class ContainerActivity : AppCompatActivity() {
+class ContainerActivity : BaseActivity() {
 
     private var backPressedTime = 0L
     private var aClass: Class<*>? = null
@@ -34,6 +33,9 @@ class ContainerActivity : AppCompatActivity() {
         var bestPM = 0f
         lateinit var chipNavBar: ChipNavigationBar
         lateinit var frame_layout: FrameLayout
+
+        var best_option_name = ""
+        var best_option_score = ""
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -97,6 +99,7 @@ class ContainerActivity : AppCompatActivity() {
                 }
             }
         })
+
     }
 
     private fun openFragment() {

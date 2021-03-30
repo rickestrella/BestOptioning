@@ -11,6 +11,7 @@ import com.techpig.bestoptioning.ContainerActivity.Companion.chipNavBar
 import com.techpig.bestoptioning.ListVehicleFragment.Companion.addVButton
 import com.techpig.bestoptioning.ListVehicleFragment.Companion.cmpButton
 import kotlinx.android.synthetic.main.vehicles_list_layout.view.*
+import java.text.DecimalFormat
 
 class VehicleListAdapter(val context: Context, private val items: ArrayList<VehicleObject>) :
     RecyclerView.Adapter<VehicleListAdapter.ViewHolder>() {
@@ -51,7 +52,7 @@ class VehicleListAdapter(val context: Context, private val items: ArrayList<Vehi
         holder.vehicleMakeTitle.text = item.getModelMake()
         holder.vehicleDate.text = "${item.getYear()}/${item.getMonth()}"
         holder.reading.text = "${item.getOdometer()} km/mi"
-        holder.vehiclePrice.text = "$ ${trimTrailingZero(item.getPrice().toString())}"
+        holder.vehiclePrice.text = "$ ${item.getPrice().toLong()}"
 
         holder.deleteVehicle.setOnClickListener {
             items.removeAt(holder.layoutPosition)
