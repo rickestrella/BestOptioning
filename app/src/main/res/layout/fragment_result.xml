@@ -1,26 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/result_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/result_layout"
     tools:context=".ResultFragment">
 
     <LinearLayout
+        android:id="@+id/resultsLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:id="@+id/resultsLayout"
         android:padding="8dp">
 
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="20">
+            android:layout_weight="10"
+            android:fillViewport="true">
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
@@ -39,13 +42,18 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="@string/best_choice_desc"/>
+                        android:text="@string/best_choice_desc" />
 
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/bestChoiceRv"
-                        android:layout_marginVertical="5dp"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content" />
+                        android:layout_height="wrap_content"
+                        android:layout_marginVertical="5dp" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/best_choice_desc_bottom" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -66,27 +74,31 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="@string/best_bet_desc"/>
+                        android:text="@string/best_bet_desc" />
 
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/bestBetRv"
-                        android:layout_marginVertical="5dp"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content" />
+                        android:layout_height="wrap_content"
+                        android:layout_marginVertical="5dp" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/best_bet_desc_bottom" />
                 </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:layout_marginVertical="5dp">
+                    android:layout_marginVertical="5dp"
+                    android:orientation="vertical">
 
                     <TextView
                         style="@style/TextAppearance.AppCompat.Light.SearchResult.Title"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/bpr"
-                        android:textColor="#212121"
                         android:textSize="20sp"
                         android:textStyle="bold|italic" />
 
@@ -130,27 +142,17 @@
                         android:textSize="20sp"
                         android:textStyle="bold|italic" />
 
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal">
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="The vehicle with the closest value to the"/>
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:textStyle="italic|bold"
-                            android:text=" BPR."/>
-                    </LinearLayout>
-
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/bestOptionRv"
-                        android:layout_marginVertical="5dp"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content" />
+                        android:layout_height="wrap_content"
+                        android:layout_marginVertical="5dp" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/vin_ucn_relations_desc" />
+
                 </LinearLayout>
             </LinearLayout>
         </ScrollView>
@@ -158,16 +160,18 @@
         <!-- Botones -->
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:background="@android:color/transparent"
+            android:baselineAligned="false"
             android:gravity="center_horizontal"
-            android:orientation="horizontal"
-            android:baselineAligned="false">
+            android:orientation="horizontal">
 
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:gravity="center_horizontal"
                 android:layout_weight="1"
+                android:gravity="center_horizontal"
                 tools:ignore="NestedWeights">
 
                 <Button
@@ -180,8 +184,8 @@
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:gravity="center_horizontal"
-                android:layout_weight="1">
+                android:layout_weight="1"
+                android:gravity="center_horizontal">
 
                 <Button
                     android:id="@+id/donateButton"

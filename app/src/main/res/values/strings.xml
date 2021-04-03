@@ -10,7 +10,7 @@
     <string name="subtitle">Best Optioning slogan</string>
     <string name="vehicle_make">E.g. Nissan/Versa</string>
     <string name="required_vehicle_information">Required Vehicle Information</string>
-    <string name="date_of_manufacturing">Year and month of manufacturing</string>
+    <string name="date_of_manufacturing">Year and month of manufacture</string>
     <string name="vehicle_model">Vehicle Model</string>
     <string name="mm_yyyy">%1$s%2$s</string>
     <string name="month_year">month / year</string>
@@ -63,15 +63,18 @@
     <string name="new_comparison">New Comparison</string>
     <string name="donate">Donate</string>
     <string name="finish">Finish</string>
-    <string name="best_choice">Best Choice</string>
-    <string name="best_bet">Best Bet</string>
+    <string name="best_choice">VIN INDICATORS</string>
+    <string name="best_bet">UCN INDICATORS</string>
     <string name="bpr">BPR</string>
-    <string name="best_possible_match_between_both_indicators">It\'s the best possible <b>VII</b> <b>/</b> <b>UCI</b> relation: </string>
+    <string name="best_possible_match_between_both_indicators">It\'s the ideal <b>VIN/UCN</b> relation: </string>
     <string name="bpm_example">0.806</string>
-    <string name="best_option">Best Option</string>
+    <string name="best_option">VIN/UCN RELATIONS</string>
     <string name="logo">logo</string>
     <string name="next">Next</string>
     <string name="km">km</string>
-    <string name="best_choice_desc">It\'s the vehicle with the highest <b>VII</b>. The <b>V</b>ehicle-<b>I</b>nformation <b>I</b>ndicator is based on the combination of the price, mileage and date of manufacturing.</string>
-    <string name="best_bet_desc">It\'s the vehicle with the lowest <b>UCI</b>. The <b>U</b>sage-<b>C</b>ost <b>I</b>ndicator is based on the buyer\'s personal needs expressed by the M/K data.</string>
+    <string name="best_choice_desc">They are based on the combination of price, mileage and date of manufacture.</string>
+    <string name="best_bet_desc">They are based on the buyer\'s personal needs expressed by the M/K data.</string>
+    <string name="best_choice_desc_bottom">The vehicle with the highest <b>VIN</b> is your <b>best-choice.</b></string>
+    <string name="best_bet_desc_bottom">The vehicle with the lowest <b>UCN</b> is your <b>best-bet.</b></string>
+    <string name="vin_ucn_relations_desc">The vehicle with the closest value to the <b>bpr</b>, is your <b>BEST-OPTION!</b></string>
 </resources>

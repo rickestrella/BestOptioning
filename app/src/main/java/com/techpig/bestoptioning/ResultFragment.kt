@@ -41,7 +41,6 @@ class ResultFragment : Fragment() {
     lateinit var bestBetRv: RecyclerView
     lateinit var bestOptionRv: RecyclerView
 
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?

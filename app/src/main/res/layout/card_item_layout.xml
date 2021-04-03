@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="130dp"
-    android:layout_height="90dp"
-    android:padding="3dp">
+    android:layout_width="135dp"
+    android:layout_height="80dp"
+    android:gravity="center"
+    android:padding="5dp">
 
     <androidx.cardview.widget.CardView
         android:id="@+id/containerCard"
@@ -24,10 +25,10 @@
                 style="@style/TextAppearance.AppCompat.Light.SearchResult.Subtitle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="model/make"
+                android:ellipsize="marquee"
                 android:marqueeRepeatLimit="marquee_forever"
                 android:scrollHorizontally="true"
-                android:ellipsize="marquee"
+                android:text="model/make"
                 android:textAlignment="center"
                 android:textSize="17sp" />
 
@@ -35,9 +36,9 @@
                 android:id="@+id/cardScore"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="2649.8500"
                 android:ellipsize="marquee"
                 android:marqueeRepeatLimit="marquee_forever"
+                android:text="2649.8500"
                 android:textAlignment="center"
                 android:textSize="20sp"
                 android:textStyle="bold" />
