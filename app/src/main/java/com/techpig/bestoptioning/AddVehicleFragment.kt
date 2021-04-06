@@ -441,6 +441,7 @@ class AddVehicleFragment : Fragment() {
                 ContainerActivity.closest = bestOption()
                 ContainerActivity.bestPM = bestPossibleMatch
 
+                @Suppress("DEPRECATION")
                 fragmentManager?.beginTransaction()!!
                     .replace(R.id.frameLayout, ListVehicleFragment()).addToBackStack("listVehicle")
                     .commit()
@@ -473,6 +474,7 @@ class AddVehicleFragment : Fragment() {
             if (Vehicle.vehicles.size == 0) {
                 activity?.finish()
             } else {
+                @Suppress("DEPRECATION")
                 fragmentManager?.beginTransaction()!!
                     .replace(R.id.frameLayout, ListVehicleFragment())
                     .addToBackStack("vehicleList").commit()
