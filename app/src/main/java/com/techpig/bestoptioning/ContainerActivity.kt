@@ -14,6 +14,7 @@ import android.widget.Toast
 import androidx.core.content.res.ResourcesCompat
 import com.ismaeldivita.chipnavigation.BuildConfig
 import com.ismaeldivita.chipnavigation.ChipNavigationBar
+import com.tapadoo.alerter.Alerter
 import com.techpig.bestoptioning.Vehicle.Companion.vehicles
 import kotlin.system.exitProcess
 
@@ -99,7 +100,6 @@ class ContainerActivity : BaseActivity() {
                 }
             }
         })
-
     }
 
     private fun openFragment() {

@@ -9,16 +9,14 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.FrameLayout
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.*
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import nl.dionsegijn.konfetti.KonfettiView
 import nl.dionsegijn.konfetti.models.Shape
 import nl.dionsegijn.konfetti.models.Size
+import java.text.DecimalFormat
 import kotlin.math.abs
 
 class ResultFragment : Fragment() {
@@ -41,6 +39,7 @@ class ResultFragment : Fragment() {
     lateinit var bestBetRv: RecyclerView
     lateinit var bestOptionRv: RecyclerView
 
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -55,7 +54,6 @@ class ResultFragment : Fragment() {
         bestChoiceRv = v.findViewById(R.id.bestChoiceRv)
         bestBetRv = v.findViewById(R.id.bestBetRv)
         bestOptionRv = v.findViewById(R.id.bestOptionRv)
-
 
 
         when (context?.resources!!.configuration.uiMode.and(Configuration.UI_MODE_NIGHT_MASK)) {
@@ -102,6 +100,11 @@ class ResultFragment : Fragment() {
         val builder = AlertDialog.Builder(requireContext())
         val alertLayout: View = layoutInflater.inflate(R.layout.dialog_layout, null)
 
+        fun formatNumber(number: Float): Float {
+            val df = DecimalFormat("####.####")
+            return df.format(number.toDouble()).toFloat()
+        }
+
         builder.setView(alertLayout)
         val dialog = builder.create()
         dialog.show()
@@ -118,14 +121,12 @@ class ResultFragment : Fragment() {
             .setPosition(-20f, viewKonfetti.width + 20f, -20f, -50f)
             .burst(900)
 
-        val dialogBpr = alertLayout.findViewById<TextView>(R.id.dialog_bpr)
-        dialogBpr.text = boBpr
-
         val dialogMM = alertLayout.findViewById<TextView>(R.id.dialog_model_make)
         dialogMM.text = boTitle
 
         val dialogVS = alertLayout.findViewById<TextView>(R.id.dialog_vehicle_score)
-        dialogVS.text = boScore
+        val dialog_vehicle_score = formatNumber(boScore.toFloat())
+        dialogVS.text = dialog_vehicle_score.toString()
 
         val dialogButton = alertLayout.findViewById<Button>(R.id.dismiss_dialog_button)
         dialogButton.setOnClickListener {

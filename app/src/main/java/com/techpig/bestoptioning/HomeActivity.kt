@@ -24,8 +24,9 @@ class HomeActivity : AppCompatActivity() {
 
         window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
 
+        @Suppress("DEPRECATION")
         main_descriprion.text =
-            Html.fromHtml("It's a way to help car buyers decide<br>which car to buy.<br>After the Required VEHICLE and USAGE<br>information of 2 or more comparable<br>vehicles has been entered,<br>this app will generate<br>numerical indicators for each car<br>and compare those values to reflect<br>which one could be your <b><i>best-choice,</b><br><b><i>best-bet</b> and <b><i>BEST-OPTION!</b><br><br> <p style='text-align: center'><u>It's easier and it works!</p>")
+            Html.fromHtml("It's a way to help car buyers decide<br>which car to buy.<br>After some VEHICLE and USAGE<br>information of 2 or more comparable<br>vehicles has been entered,<br>this app will generate<br>numerical indicators for each car<br>to compare those values and reflect<br>which one could be your <b><i>best-choice,</b><br><b><i>best-bet</b> and <b><i>BEST-OPTION!</b><br> <p style='text-align: center'><u>It's easier and it works!</p>")
         addVehicleMainButton.setOnClickListener {
             val i = Intent(this@HomeActivity, ContainerActivity::class.java)
             startActivity(i)
@@ -37,6 +38,16 @@ class HomeActivity : AppCompatActivity() {
                 mainLogo.setBackgroundResource(R.drawable.car_logo_night)
                 titleIV.setBackgroundResource(R.drawable.title_night)
                 subtitleIV.setBackgroundResource(R.drawable.subtitle_night)
+
+                mainLogo.minimumWidth = WindowManager.LayoutParams.WRAP_CONTENT
+                mainLogo.maxWidth = WindowManager.LayoutParams.WRAP_CONTENT
+
+                titleIV.minimumWidth = WindowManager.LayoutParams.WRAP_CONTENT
+                titleIV.maxWidth = WindowManager.LayoutParams.WRAP_CONTENT
+
+                subtitleIV.minimumWidth = WindowManager.LayoutParams.WRAP_CONTENT
+                subtitleIV.maxWidth = WindowManager.LayoutParams.WRAP_CONTENT
+
                 main_descriprion.setTextColor(Color.parseColor("#FFFFFF"))
             }
             Configuration.UI_MODE_NIGHT_NO -> {
@@ -44,6 +55,16 @@ class HomeActivity : AppCompatActivity() {
                 mainLogo.setBackgroundResource(R.drawable.car_logo_day)
                 titleIV.setBackgroundResource(R.drawable.title_day)
                 subtitleIV.setBackgroundResource(R.drawable.subtitle_day)
+
+                mainLogo.minimumWidth = WindowManager.LayoutParams.WRAP_CONTENT
+                mainLogo.maxWidth = WindowManager.LayoutParams.WRAP_CONTENT
+
+                titleIV.minimumWidth = WindowManager.LayoutParams.WRAP_CONTENT
+                titleIV.maxWidth = WindowManager.LayoutParams.WRAP_CONTENT
+
+                subtitleIV.minimumWidth = WindowManager.LayoutParams.WRAP_CONTENT
+                subtitleIV.maxWidth = WindowManager.LayoutParams.WRAP_CONTENT
+
                 main_descriprion.setTextColor(Color.parseColor("#000000"))
             }
         }

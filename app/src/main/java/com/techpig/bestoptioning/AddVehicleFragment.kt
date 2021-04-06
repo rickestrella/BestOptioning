@@ -17,6 +17,7 @@ import androidx.cardview.widget.CardView
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import com.google.android.material.radiobutton.MaterialRadioButton
+import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
 import com.tapadoo.alerter.Alerter
 import com.techpig.bestoptioning.ContainerActivity.Companion.chipNavBar
@@ -30,7 +31,11 @@ class AddVehicleFragment : Fragment() {
     private val calendar = Calendar.getInstance()
     private val currentYear = calendar[Calendar.YEAR]
     private val currentMonth = calendar[Calendar.MONTH]
-    private val currentDayOfMonth = calendar[Calendar.DAY_OF_MONTH]
+
+    private val newMkE = 250000
+    private var savedMkEnd = 0
+    private val newMkY = 20000
+    private var savedMkYear = 0
 
     private var chosenMonth: Long = 6
     private var bestPossibleMatch = 0f
@@ -47,6 +52,10 @@ class AddVehicleFragment : Fragment() {
     //SharedPreferences
     private var prefs: SharedPreferences? = null
     private val PREFS_FILENAME = "com.techpig.bestoptioning.prefs"
+
+    private val MILEAGE_YEAR = "mileYear"
+    private val MILEAGE_END = "mileEnd"
+
 
     //Objects
 
@@ -135,8 +144,8 @@ class AddVehicleFragment : Fragment() {
                 usageInfoCard.setCardBackgroundColor(Color.parseColor("#141414"))
                 vehicleInfoCard.setCardBackgroundColor(Color.parseColor("#141414"))
 
-                titleTv.setTextColor(Color.parseColor("#FFDA5A00"))
-                usageInformationTitleTV.setTextColor(Color.parseColor("#FFDA5A00"))
+                titleTv.setTextColor(Color.parseColor("#7FD7FF"))
+                usageInformationTitleTV.setTextColor(Color.parseColor("#7FD7FF"))
 
                 monthInfoTV.setTextColor(Color.parseColor("#B5B5B5"))
                 odometerInfoTV.setTextColor(Color.parseColor("#B5B5B5"))
@@ -293,7 +302,32 @@ class AddVehicleFragment : Fragment() {
             }
         }
 
+        val mke = v.findViewById<TextInputEditText>(R.id.et_mke)
+        val mky = v.findViewById<TextInputEditText>(R.id.et_mky)
+
+        if (prefs!!.getInt(MILEAGE_YEAR, 0).toString().trim { it <= ' ' }
+                .isEmpty() || prefs!!.getInt(MILEAGE_YEAR, 0) == 0) {
+            mky.text = SpannableStringBuilder("$newMkY")
+        } else {
+            savedMkYear = prefs!!.getInt(MILEAGE_YEAR, 0)
+            mky.text = SpannableStringBuilder(
+                prefs!!.getInt(MILEAGE_YEAR, 0).toString()
+            )
+        }
+
+        if (prefs!!.getInt(MILEAGE_END, 0).toString().trim { it <= ' ' }
+                .isEmpty() || prefs!!.getInt(MILEAGE_END, 0) == 0) {
+            mke.text = SpannableStringBuilder("$newMkE")
+        } else {
+            savedMkEnd = prefs!!.getInt(MILEAGE_END, 0)
+            mke.text = SpannableStringBuilder(
+                prefs!!.getInt(MILEAGE_END, 0).toString()
+            )
+        }
+
         //TODO Mantener millas o km con sharedPreferences
+
+
 
         if (CHOSEN_CURRENCY == 2) {
             val sharedPreferencesSavedValue = prefs!!.getFloat("CURRENCY_EQ", 0f)
@@ -388,8 +422,8 @@ class AddVehicleFragment : Fragment() {
                         manufacturingYear.editText!!.text.toString().toLong(),
                         odometerRead.editText?.text.toString().toInt(),
                         price_new.editText?.text.toString().toDouble(),
-                        mkYear.editText?.text.toString().toInt(),
-                        mkEnd.editText?.text.toString().toInt()
+                        mky.editableText.toString().toInt(),
+                        mke.editableText.toString().toInt()
                     )
                 }
 
@@ -400,8 +434,8 @@ class AddVehicleFragment : Fragment() {
                         manufacturingYear.editText!!.text.toString().toLong(),
                         odometerRead.editText?.text.toString().toInt(),
                         Integer.parseInt(price.editText?.text.toString()).toDouble(),
-                        mkYear.editText?.text.toString().toInt(),
-                        mkEnd.editText?.text.toString().toInt(),
+                        mky.editableText.toString().toInt(),
+                        mke.editableText.toString().toInt(),
                     )
                 }
                 ContainerActivity.closest = bestOption()
@@ -410,19 +444,28 @@ class AddVehicleFragment : Fragment() {
                 fragmentManager?.beginTransaction()!!
                     .replace(R.id.frameLayout, ListVehicleFragment()).addToBackStack("listVehicle")
                     .commit()
-
                 val alert = Alerter.create(requireActivity())
-                alert.setTitle("Success!")
-                alert.setText("Your vehicle has been added")
+                alert.setTitle(R.string.success)
+                alert.setText(R.string.vehicle_added)
                 alert.setIcon(R.drawable.ic_done)
                 when (context?.resources!!.configuration.uiMode.and(Configuration.UI_MODE_NIGHT_MASK)) {
                     Configuration.UI_MODE_NIGHT_YES -> alert.setBackgroundColorRes(R.color.green_hard)
-                    Configuration.UI_MODE_NIGHT_NO -> alert.setBackgroundColorRes(R.color.green_A700)
+                    Configuration.UI_MODE_NIGHT_NO -> alert.setBackgroundColorRes(R.color.new_green)
                 }
-                alert.setDuration(4500)
+                alert.setDuration(1000)
                 alert.enableSwipeToDismiss()
                 alert.show()
                 chipNavBar.setItemSelected(R.id.list_menu, true)
+            }
+
+            if (mky.editableText.toString().toInt() != savedMkYear) {
+                editor!!.putInt(MILEAGE_YEAR, mky.editableText.toString().toInt())
+                editor.apply()
+            }
+
+            if (mke.editableText.toString().toInt() != savedMkEnd) {
+                editor!!.putInt(MILEAGE_END, mke.editableText.toString().toInt())
+                editor.apply()
             }
         }
 

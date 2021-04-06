@@ -1,6 +1,5 @@
 <resources>
     <string name="app_name">Best Optioning</string>
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="vehicle_list">Vehicle list</string>
     <string name="add_vehicle">Add Vehicle</string>
     <string name="result">Results</string>
@@ -31,8 +30,8 @@
     <string name="brazilian_real">BRL</string>
     <string name="required_usage_information">Required Usage Information</string>
     <string name="estimated_distance_you_d_drive_yearly">Est. distance you\'d drive yearly</string>
-    <string name="mk_end">MK End</string>
-    <string name="mk_yearly">MK Yearly</string>
+    <string name="mk_end">M/K End</string>
+    <string name="mk_yearly">M/K Yearly</string>
     <string name="cancel">Cancel</string>
     <string name="continue_txt">Continue</string>
     <string name="vehicleAdded">Vehicle successfully added</string>
@@ -41,7 +40,7 @@
     <string name="costs">Include in this entry any additional costs of extras or repairs if needed.</string>
     <string name="costs_2">Include in the price entries any additional costs for extras or repairs if needed.</string>
     <string name="mk_end_tv">Estimated number of mi/km when you wouldn\'t like to drive this vehicle ANYMORE. \nIf not sure, leave the default value.</string>
-    <string name="mk_year_tv">Enter the estimated number of km/mi you would drive this vehicle in ONE YEAR. \nIf not sure, leave the default value.</string>
+    <string name="mk_year_tv">Enter the estimated number of mi/km you would drive this vehicle in ONE YEAR. \nIf not sure, leave the default value.</string>
     <string name="results">Results</string>
     <string name="other_currencies">FOR OTHER CURRENCIES</string>
     <string name="_1usd">1 US$ =</string>
@@ -66,15 +65,27 @@
     <string name="best_choice">VIN INDICATORS</string>
     <string name="best_bet">UCN INDICATORS</string>
     <string name="bpr">BPR</string>
-    <string name="best_possible_match_between_both_indicators">It\'s the ideal <b>VIN/UCN</b> relation: </string>
+    <string name="best_possible_match_between_both_indicators">It\'s the ideal <b>VIN/UCN</b> relationship: </string>
     <string name="bpm_example">0.806</string>
-    <string name="best_option">VIN/UCN RELATIONS</string>
+    <string name="best_option">VIN/UCN RELATIONSHIPS</string>
     <string name="logo">logo</string>
     <string name="next">Next</string>
     <string name="km">km</string>
     <string name="best_choice_desc">They are based on the combination of price, mileage and date of manufacture.</string>
     <string name="best_bet_desc">They are based on the buyer\'s personal needs expressed by the M/K data.</string>
-    <string name="best_choice_desc_bottom">The vehicle with the highest <b>VIN</b> is your <b>best-choice.</b></string>
-    <string name="best_bet_desc_bottom">The vehicle with the lowest <b>UCN</b> is your <b>best-bet.</b></string>
-    <string name="vin_ucn_relations_desc">The vehicle with the closest value to the <b>bpr</b>, is your <b>BEST-OPTION!</b></string>
+    <string name="best_choice_desc_bottom">The vehicle with the highest <b>VIN</b> is your </string>
+    <string name="best_choice_text"><i><b>best-choice</b></i></string>
+    <string name="best_bet_text"><i><b>best-bet.</b></i></string>
+    <string name="best_option_text"><i><b>It\'s your BEST-OPTION!</b></i></string>
+    <string name="best_bet_desc_bottom">The vehicle with the lowest <b>UCN</b> is your </string>
+    <string name="vin_ucn_relations_desc">The vehicle with the closest value to the <b>bpr</b>:</string>
+    <string name="mileage_info">Mileage</string>
+    <string name="make_model">Make/Model</string>
+    <string name="price_of_vehicle">Price of the vehicle</string>
+    <string name="vin_ucn_relations_desc_2">It\'s your </string>
+    <string name="good_to_go">You\'re good to go!</string>
+    <string name="bo">Best Option:</string>
+    <string name="vehicle_score">Vehicle score:</string>
+    <string name="success">Success!</string>
+    <string name="vehicle_added">Your vehicle has been added</string>
 </resources>

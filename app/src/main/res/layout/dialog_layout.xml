@@ -22,7 +22,7 @@
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="15dp"
             android:padding="12dp"
-            app:cardCornerRadius="8dp"
+            app:cardCornerRadius="6dp"
             app:cardElevation="8dp">
 
             <RelativeLayout
@@ -36,7 +36,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="32dp"
                     android:gravity="center_horizontal"
-                    android:text="We've got a winner!"
+                    android:text="@string/good_to_go"
                     android:textSize="23sp"
                     android:textStyle="bold" />
 
@@ -53,50 +53,34 @@
                         android:id="@+id/dialog_model_make"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
-                        android:layout_marginBottom="16dp"
+                        android:layout_marginBottom="8dp"
                         android:gravity="center_horizontal"
                         android:text="Nissan / Versa"
-                        android:textSize="20sp"
+                        android:textSize="22sp"
                         android:textStyle="bold" />
 
-                    <LinearLayout
+                    <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginBottom="8dp"
                         android:gravity="center_horizontal"
-                        android:orientation="horizontal">
+                        android:text="Your Best Option!"
+                        android:textSize="20sp"
+                        android:textStyle="bold|italic" />
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginEnd="12dp"
-                            android:text="BPR:"
-                            android:textSize="16sp"
-                            android:textStyle="bold" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/vehicle_score"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
 
-                        <TextView
-                            android:id="@+id/dialog_bpr"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="2365.2361"
-                            android:textSize="16sp" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="25dp"
-                            android:layout_marginEnd="12dp"
-                            android:text="Vehicle Score:"
-                            android:textSize="16sp"
-                            android:textStyle="bold" />
-
-                        <TextView
-                            android:id="@+id/dialog_vehicle_score"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="2365.2361"
-                            android:textSize="16sp" />
-                    </LinearLayout>
+                    <TextView
+                        android:id="@+id/dialog_vehicle_score"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="2365.2361"
+                        android:textSize="16sp" />
 
                 </LinearLayout>
             </RelativeLayout>
