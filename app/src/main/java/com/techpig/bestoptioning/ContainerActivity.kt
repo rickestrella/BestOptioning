@@ -35,8 +35,6 @@ class ContainerActivity : BaseActivity() {
         lateinit var chipNavBar: ChipNavigationBar
         lateinit var frame_layout: FrameLayout
 
-        var best_option_name = ""
-        var best_option_score = ""
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -66,7 +64,7 @@ class ContainerActivity : BaseActivity() {
 
         chipNavBar.setItemSelected(R.id.add_menu, true)
         aClass = AddVehicleFragment::class.java
-        supportActionBar!!.title = "Add Vehicle"
+        supportActionBar!!.title = getString(R.string.add_vehicle)
         openFragment()
 
         if (vehicles.size < 1) {
@@ -80,7 +78,7 @@ class ContainerActivity : BaseActivity() {
             override fun onItemSelected(id: Int) {
                 when (id) {
                     R.id.add_menu -> {
-                        supportActionBar!!.title = "Add Vehicle"
+                        supportActionBar!!.title = getString(R.string.add_vehicle)
                         frag = "addVehicle"
                         aClass = AddVehicleFragment::class.java
                         openFragment()

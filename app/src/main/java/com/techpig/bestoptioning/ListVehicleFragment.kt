@@ -38,13 +38,7 @@ class ListVehicleFragment : Fragment() {
         setupVehicleRecyclerView()
 
         addVButton.setOnClickListener {
-            chipNavBar.setItemEnabled(R.id.list_menu, true)
             chipNavBar.setItemSelected(R.id.add_menu, true)
-            chipNavBar.setItemSelected(R.id.list_menu, false)
-            chipNavBar.setItemSelected(R.id.result_menu, false)
-            fragmentManager?.beginTransaction()!!
-                .replace(R.id.frameLayout, AddVehicleFragment())
-                .addToBackStack("addVehicle").commit()
             chipNavBar.setItemEnabled(R.id.add_menu, true)
             chipNavBar.setItemEnabled(R.id.result_menu, false)
         }
@@ -55,12 +49,11 @@ class ListVehicleFragment : Fragment() {
                 bundle.putFloat("bpm", BestOptionValue())
                 bundle.putFloat("bestPm", bestPossibleMatch())
             }
-            chipNavBar.setItemEnabled(R.id.result_menu, true)
             chipNavBar.setItemEnabled(R.id.add_menu, false)
             chipNavBar.setItemSelected(R.id.result_menu, true)
         }
 
-        ItemTouchHelper(object : ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.RIGHT){
+        ItemTouchHelper(object : ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.RIGHT) {
             override fun onMove(
                 recyclerView: RecyclerView,
                 viewHolder: RecyclerView.ViewHolder,
@@ -75,12 +68,21 @@ class ListVehicleFragment : Fragment() {
                 Vehicle.vehicles.removeAt(viewHolder.adapterPosition)
                 //Notify adapter
                 vehicleAdapter!!.notifyDataSetChanged()
+                if (Vehicle.vehicles.size <= 1) {
+                    chipNavBar.setItemEnabled(R.id.result_menu, false)
+                } else {
+                    chipNavBar.setItemEnabled(R.id.result_menu, true)
+                }
 
-                Toast.makeText(activity?.applicationContext!!, "Vehicle deleted", Toast.LENGTH_SHORT).show()
+                Toast.makeText(
+                    requireActivity().applicationContext,
+                    getString(R.string.vehicle_removed),
+                    Toast.LENGTH_SHORT
+                ).show()
             }
         }).attachToRecyclerView(vehicleListRv)
 
-        ItemTouchHelper(object : ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT){
+        ItemTouchHelper(object : ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT) {
             override fun onMove(
                 recyclerView: RecyclerView,
                 viewHolder: RecyclerView.ViewHolder,
@@ -95,7 +97,16 @@ class ListVehicleFragment : Fragment() {
                 Vehicle.vehicles.removeAt(viewHolder.adapterPosition)
                 //Notify adapter
                 vehicleAdapter!!.notifyDataSetChanged()
-                Toast.makeText(activity?.applicationContext!!, "Vehicle deleted", Toast.LENGTH_SHORT).show()
+                if (Vehicle.vehicles.size <= 1) {
+                    chipNavBar.setItemEnabled(R.id.result_menu, false)
+                } else {
+                    chipNavBar.setItemEnabled(R.id.result_menu, true)
+                }
+                Toast.makeText(
+                    requireActivity().applicationContext,
+                    getString(R.string.vehicle_removed),
+                    Toast.LENGTH_SHORT
+                ).show()
             }
         }).attachToRecyclerView(vehicleListRv)
 

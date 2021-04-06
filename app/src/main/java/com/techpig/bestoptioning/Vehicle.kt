@@ -7,7 +7,7 @@ class Vehicle(vehicleObject: VehicleObject) {
 
         fun addVehicle(
             modelMake: String, selectedMonth: Long, selectedYear: Long,
-            odometerReading: Int, price: Double, mkYearly: Int, mkEnd: Int, ucin: Float, vin: Float, cociente: Float, vu_relation: Float
+            odometerReading: Int, price: Double, mkYearly: Int, mkEnd: Int, ucin: Float, vin: Float, cociente: Float, vu_relation: Float, isKmPicked: Boolean
         ): ArrayList<VehicleObject> {
             vehicles.add(
                 VehicleObject(
@@ -21,7 +21,8 @@ class Vehicle(vehicleObject: VehicleObject) {
                     ucin,
                     vin,
                     cociente,
-                    vu_relation
+                    vu_relation,
+                    isKmPicked
                 )
             )
             return vehicles

@@ -51,7 +51,12 @@ class VehicleListAdapter(val context: Context, private val items: ArrayList<Vehi
 
         holder.vehicleMakeTitle.text = item.getModelMake()
         holder.vehicleDate.text = "${item.getYear()}/${item.getMonth()}"
-        holder.reading.text = "${item.getOdometer()} km/mi"
+        if (item.getIsKmPicked()) {
+            holder.reading.text = "${item.getOdometer()} km"
+        } else {
+            holder.reading.text = "${item.getOdometer()} mi"
+        }
+
         holder.vehiclePrice.text = "$ ${item.getPrice().toLong()}"
 
         holder.deleteVehicle.setOnClickListener {

@@ -11,7 +11,8 @@ class VehicleObject(
     private var ucn: Float,
     private var vin: Float,
     private var cociente: Float,
-    private var vu_relation: Float
+    private var vu_relation: Float,
+    private var isKmPicked: Boolean
 ) {
 
     fun getModelMake(): String {
@@ -54,30 +55,6 @@ class VehicleObject(
         this.price = price
     }
 
-    fun getMkYear(): Int {
-        return mkYear
-    }
-
-    fun setMkYear(mkYear: Int) {
-        this.mkYear = mkYear
-    }
-
-    fun getMkEnd(): Int {
-        return mkEnd
-    }
-
-    fun setMkEnd(mkEnd: Int) {
-        this.mkEnd = mkEnd
-    }
-
-    fun getCociente(): Float {
-        return cociente
-    }
-
-    fun setCociente(cociente: Float) {
-        this.cociente = cociente
-    }
-
     fun getUcn(): Float {
         return ucn
     }
@@ -100,5 +77,13 @@ class VehicleObject(
 
     fun setVu_relation(vu_relation: Float) {
         this.vu_relation = vu_relation
+    }
+
+    fun getIsKmPicked(): Boolean {
+        return isKmPicked
+    }
+
+    fun setIsKmPicked(isKmPicked: Boolean) {
+        this.isKmPicked = isKmPicked
     }
 }

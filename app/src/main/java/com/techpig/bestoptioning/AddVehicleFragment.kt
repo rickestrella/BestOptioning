@@ -6,6 +6,7 @@ import android.content.res.Configuration
 import android.graphics.Color
 import android.os.Bundle
 import android.text.SpannableStringBuilder
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -120,24 +121,32 @@ class AddVehicleFragment : Fragment() {
         mkEndInfoTv = v.findViewById(R.id.mkEndInfoTv)
         vehicleInfoCard = v.findViewById(R.id.vehicleInfoCard)
         usageInfoCard = v.findViewById(R.id.usageInfoCard)
+        val mke = v.findViewById<TextInputEditText>(R.id.et_mke)
+        val mky = v.findViewById<TextInputEditText>(R.id.et_mky)
+
+        prefs = activity?.applicationContext!!.getSharedPreferences(
+            PREFS_FILENAME,
+            AppCompatActivity.MODE_PRIVATE
+        )
+        val editor = prefs!!.edit()
+
 
         months = arrayListOf(
-            "JANUARY",
-            "FEBRUARY",
-            "MARCH",
-            "APRIL",
-            "MAY",
-            "JUNE",
-            "JULY",
-            "AUGUST",
-            "SEPTEMBER",
-            "OCTOBER",
-            "NOVEMBER",
-            "DECEMBER",
+            getString(R.string.january),
+            getString(R.string.february),
+            getString(R.string.march),
+            getString(R.string.april),
+            getString(R.string.may),
+            getString(R.string.june),
+            getString(R.string.july),
+            getString(R.string.august),
+            getString(R.string.september),
+            getString(R.string.october),
+            getString(R.string.november),
+            getString(R.string.december),
         )
 
-
-        units = arrayListOf("km", "mi")
+        units = arrayListOf(getString(R.string.km), getString(R.string.miles))
 
         when (context?.resources!!.configuration.uiMode.and(Configuration.UI_MODE_NIGHT_MASK)) {
             Configuration.UI_MODE_NIGHT_YES -> {
@@ -173,14 +182,25 @@ class AddVehicleFragment : Fragment() {
                         months
                     )
                 )
-
-                (unitPicker.editText as? AutoCompleteTextView)?.setAdapter(
-                    ArrayAdapter(
-                        activity?.applicationContext!!,
-                        R.layout.spinner_items_night,
-                        units
+                if (prefs!!.getString(READING_UNIT, "") == getString(R.string.miles)) {
+                    unitPicker.editText!!.text = SpannableStringBuilder("mi")
+                    (unitPicker.editText as? AutoCompleteTextView)?.setAdapter(
+                        ArrayAdapter(
+                            activity?.applicationContext!!,
+                            R.layout.spinner_items_night,
+                            arrayOf(getString(R.string.miles), getString(R.string.km))
+                        )
                     )
-                )
+                } else {
+                    unitPicker.editText!!.text = SpannableStringBuilder("km")
+                    (unitPicker.editText as? AutoCompleteTextView)?.setAdapter(
+                        ArrayAdapter(
+                            activity?.applicationContext!!,
+                            R.layout.spinner_items_night,
+                            units
+                        )
+                    )
+                }
             }
             Configuration.UI_MODE_NIGHT_NO -> {
 
@@ -217,23 +237,29 @@ class AddVehicleFragment : Fragment() {
                     )
                 )
 
-                (unitPicker.editText as? AutoCompleteTextView)?.setAdapter(
-                    ArrayAdapter(
-                        activity?.applicationContext!!,
-                        R.layout.spinner_items,
-                        units
+                if (prefs!!.getString(READING_UNIT, "") == getString(R.string.miles)) {
+                    unitPicker.editText!!.text = SpannableStringBuilder("mi")
+                    (unitPicker.editText as? AutoCompleteTextView)?.setAdapter(
+                        ArrayAdapter(
+                            activity?.applicationContext!!,
+                            R.layout.spinner_items,
+                            arrayOf(getString(R.string.miles), getString(R.string.km))
+                        )
                     )
-                )
+                } else {
+                    unitPicker.editText!!.text = SpannableStringBuilder("km")
+                    (unitPicker.editText as? AutoCompleteTextView)?.setAdapter(
+                        ArrayAdapter(
+                            activity?.applicationContext!!,
+                            R.layout.spinner_items,
+                            units
+                        )
+                    )
+                }
             }
         }
 
         usdCheckBox.isChecked = true
-
-        prefs = activity?.applicationContext!!.getSharedPreferences(
-            PREFS_FILENAME,
-            AppCompatActivity.MODE_PRIVATE
-        )
-        val editor = prefs!!.edit()
 
         when (prefs!!.getInt("CHOSEN_CURRENCY", 0)) {
             0 -> {
@@ -303,9 +329,6 @@ class AddVehicleFragment : Fragment() {
             }
         }
 
-        val mke = v.findViewById<TextInputEditText>(R.id.et_mke)
-        val mky = v.findViewById<TextInputEditText>(R.id.et_mky)
-
         if (prefs!!.getInt(MILEAGE_YEAR, 0).toString().trim { it <= ' ' }
                 .isEmpty() || prefs!!.getInt(MILEAGE_YEAR, 0) == 0) {
             mky.text = SpannableStringBuilder("$newMkY")
@@ -324,16 +347,6 @@ class AddVehicleFragment : Fragment() {
             mke.text = SpannableStringBuilder(
                 prefs!!.getInt(MILEAGE_END, 0).toString()
             )
-        }
-
-        //TODO Mantener millas o km con sharedPreferences
-
-        val chosenUnit = unitPicker.editText!!.text.toString()
-
-        if (prefs!!.getInt(READING_UNIT, 0) == 0) {
-            unitPicker.editText!!.text = SpannableStringBuilder(getString(R.string.km))
-        } else {
-            unitPicker.editText!!.text = SpannableStringBuilder(getString(R.string.miles))
         }
 
         if (CHOSEN_CURRENCY == 2) {
@@ -369,6 +382,7 @@ class AddVehicleFragment : Fragment() {
         }
 
         val shake = AnimationUtils.loadAnimation(context, R.anim.shake)
+
         addVehicleButton.setOnClickListener {
             checkFields()
             chosenMonth = monthNumber(monthPicker.editText!!.text.toString())
@@ -448,10 +462,10 @@ class AddVehicleFragment : Fragment() {
                 ContainerActivity.closest = bestOption()
                 ContainerActivity.bestPM = bestPossibleMatch
 
-                @Suppress("DEPRECATION")
-                fragmentManager?.beginTransaction()!!
-                    .replace(R.id.frameLayout, ListVehicleFragment()).addToBackStack("listVehicle")
-                    .commit()
+//                @Suppress("DEPRECATION")
+//                fragmentManager?.beginTransaction()!!
+//                    .replace(R.id.frameLayout, ListVehicleFragment()).addToBackStack("listVehicle")
+//                    .commit()
                 val alert = Alerter.create(requireActivity())
                 alert.setTitle(R.string.success)
                 alert.setText(R.string.vehicle_added)
@@ -475,14 +489,19 @@ class AddVehicleFragment : Fragment() {
                 editor!!.putInt(MILEAGE_END, mke.editableText.toString().toInt())
                 editor.apply()
             }
+            val unitPicked = unitPicker.editText!!.text.toString()
 
-            if (chosenUnit == "km") {
-                editor!!.putInt(READING_UNIT, 0)
-                editor.apply()
-            } else {
-                editor!!.putInt(READING_UNIT, 1)
-                editor.apply()
+            when (unitPicked) {
+                getString(R.string.km) -> {
+                    editor!!.putString(READING_UNIT, getString(R.string.km))
+                    editor.apply()
+                }
+                else -> {
+                    editor!!.putString(READING_UNIT, getString(R.string.miles))
+                    editor.apply()
+                }
             }
+
         }
 
         cancelButton.setOnClickListener {
@@ -497,6 +516,10 @@ class AddVehicleFragment : Fragment() {
         }
 
         return v
+    }
+
+    private fun isKm(unitPicked: String): Boolean {
+        return unitPicked == getString(R.string.km)
     }
 
     private fun newVehicle(
@@ -546,7 +569,8 @@ class AddVehicleFragment : Fragment() {
             ucn(odometerReading, price, mkEnd.toFloat(), mkYearly.toFloat()),
             ContainerActivity.vin_value,
             ContainerActivity.cociente_temp,
-            ContainerActivity.vu_relation_value
+            ContainerActivity.vu_relation_value,
+            isKm(unitPicker.editText!!.text.toString())
         )
     }
 
