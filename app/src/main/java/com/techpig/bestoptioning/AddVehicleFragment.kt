@@ -55,6 +55,7 @@ class AddVehicleFragment : Fragment() {
 
     private val MILEAGE_YEAR = "mileYear"
     private val MILEAGE_END = "mileEnd"
+    private val READING_UNIT = "reading_unit"
 
 
     //Objects
@@ -327,7 +328,13 @@ class AddVehicleFragment : Fragment() {
 
         //TODO Mantener millas o km con sharedPreferences
 
+        val chosenUnit = unitPicker.editText!!.text.toString()
 
+        if (prefs!!.getInt(READING_UNIT, 0) == 0) {
+            unitPicker.editText!!.text = SpannableStringBuilder(getString(R.string.km))
+        } else {
+            unitPicker.editText!!.text = SpannableStringBuilder(getString(R.string.miles))
+        }
 
         if (CHOSEN_CURRENCY == 2) {
             val sharedPreferencesSavedValue = prefs!!.getFloat("CURRENCY_EQ", 0f)
@@ -368,8 +375,8 @@ class AddVehicleFragment : Fragment() {
             if (manufacturingYear.editText?.text.isNullOrEmpty()) {
                 manufacturingYear.requestFocus()
                 val alert = Alerter.create(requireActivity())
-                alert.setTitle("Error")
-                alert.setText("You must provide the manufacturing year")
+                alert.setTitle(getString(R.string.error))
+                alert.setText(getString(R.string.provide_year_of_manufacture))
                 alert.setIcon(R.drawable.ic_error)
                 when (context?.resources!!.configuration.uiMode.and(Configuration.UI_MODE_NIGHT_MASK)) {
                     Configuration.UI_MODE_NIGHT_YES -> alert.setBackgroundColorRes(R.color.crimson)
@@ -388,14 +395,14 @@ class AddVehicleFragment : Fragment() {
                         price_new.error
                         price_new.requestFocus()
                         val alert = Alerter.create(requireActivity())
-                        alert.setTitle("Error")
-                        alert.setText("You must provide a price")
+                        alert.setTitle(getString(R.string.error))
+                        alert.setText(getString(R.string.provide_price))
                         alert.setIcon(R.drawable.ic_error)
                         when (context?.resources!!.configuration.uiMode.and(Configuration.UI_MODE_NIGHT_MASK)) {
                             Configuration.UI_MODE_NIGHT_YES -> alert.setBackgroundColorRes(R.color.crimson)
                             Configuration.UI_MODE_NIGHT_NO -> alert.setBackgroundColorRes(R.color.crimson_day)
                         }
-                        alert.setDuration(4500)
+                        alert.setDuration(3000)
                         alert.enableSwipeToDismiss()
                         alert.show()
                         frame_layout.animation = shake
@@ -403,14 +410,14 @@ class AddVehicleFragment : Fragment() {
                         equivalencia.error
                         equivalencia.requestFocus()
                         val alert = Alerter.create(requireActivity())
-                        alert.setTitle("Error")
-                        alert.setText("You must provide the equivalence of a dollar in your currency")
+                        alert.setTitle(getString(R.string.error))
+                        alert.setText(getString(R.string.provide_equivalence))
                         alert.setIcon(R.drawable.ic_error)
                         when (context?.resources!!.configuration.uiMode.and(Configuration.UI_MODE_NIGHT_MASK)) {
                             Configuration.UI_MODE_NIGHT_YES -> alert.setBackgroundColorRes(R.color.crimson)
                             Configuration.UI_MODE_NIGHT_NO -> alert.setBackgroundColorRes(R.color.crimson_day)
                         }
-                        alert.setDuration(4500)
+                        alert.setDuration(3000)
                         alert.enableSwipeToDismiss()
                         alert.show()
                         frame_layout.animation = shake
@@ -466,6 +473,14 @@ class AddVehicleFragment : Fragment() {
 
             if (mke.editableText.toString().toInt() != savedMkEnd) {
                 editor!!.putInt(MILEAGE_END, mke.editableText.toString().toInt())
+                editor.apply()
+            }
+
+            if (chosenUnit == "km") {
+                editor!!.putInt(READING_UNIT, 0)
+                editor.apply()
+            } else {
+                editor!!.putInt(READING_UNIT, 1)
                 editor.apply()
             }
         }
@@ -565,7 +580,7 @@ class AddVehicleFragment : Fragment() {
             validYear = true
         } else {
             val alert = Alerter.create(requireActivity())
-            alert.setTitle("Error")
+            alert.setTitle(getString(R.string.error))
             alert.setText("You must provide a year between 1920 and $currentYear")
             alert.setIcon(R.drawable.ic_error)
             when (context?.resources!!.configuration.uiMode.and(Configuration.UI_MODE_NIGHT_MASK)) {
@@ -589,40 +604,40 @@ class AddVehicleFragment : Fragment() {
 
     private fun monthNumber(monthName: String): Long {
         return when (monthName) {
-            "JANUARY" -> {
+            getString(R.string.january) -> {
                 1L
             }
-            "FEBRUARY" -> {
+            getString(R.string.february) -> {
                 2L
             }
-            "MARCH" -> {
+            getString(R.string.march) -> {
                 3L
             }
-            "APRIL" -> {
+            getString(R.string.april) -> {
                 4L
             }
-            "MAY" -> {
+            getString(R.string.may) -> {
                 5L
             }
-            "JUNE" -> {
+            getString(R.string.june) -> {
                 6L
             }
-            "JULY" -> {
+            getString(R.string.july) -> {
                 7L
             }
-            "AUGUST" -> {
+            getString(R.string.august) -> {
                 8L
             }
-            "SEPTEMBER" -> {
+            getString(R.string.september) -> {
                 9L
             }
-            "OCTOBER" -> {
+            getString(R.string.october) -> {
                 10L
             }
-            "NOVEMBER" -> {
+            getString(R.string.november) -> {
                 11L
             }
-            "DECEMBER" -> {
+            getString(R.string.december) -> {
                 12L
             }
             else -> {
@@ -643,14 +658,14 @@ class AddVehicleFragment : Fragment() {
                     price.requestFocus()
                     price.error
                     val alert = Alerter.create(requireActivity())
-                    alert.setTitle("Error")
-                    alert.setText("You must provide a price")
+                    alert.setTitle(getString(R.string.error))
+                    alert.setText(getString(R.string.provide_price))
                     alert.setIcon(R.drawable.ic_error)
                     when (context?.resources!!.configuration.uiMode.and(Configuration.UI_MODE_NIGHT_MASK)) {
                         Configuration.UI_MODE_NIGHT_YES -> alert.setBackgroundColorRes(R.color.crimson)
                         Configuration.UI_MODE_NIGHT_NO -> alert.setBackgroundColorRes(R.color.crimson_day)
                     }
-                    alert.setDuration(4500)
+                    alert.setDuration(3000)
                     alert.enableSwipeToDismiss()
                     alert.show()
                     frame_layout.animation = shake
@@ -661,14 +676,14 @@ class AddVehicleFragment : Fragment() {
                     price_new.requestFocus()
                     price_new.error
                     val alert = Alerter.create(requireActivity())
-                    alert.setTitle("Error")
-                    alert.setText("You must provide a price")
+                    alert.setTitle(getString(R.string.error))
+                    alert.setText(getString(R.string.provide_price))
                     alert.setIcon(R.drawable.ic_error)
                     when (context?.resources!!.configuration.uiMode.and(Configuration.UI_MODE_NIGHT_MASK)) {
                         Configuration.UI_MODE_NIGHT_YES -> alert.setBackgroundColorRes(R.color.crimson)
                         Configuration.UI_MODE_NIGHT_NO -> alert.setBackgroundColorRes(R.color.crimson_day)
                     }
-                    alert.setDuration(4500)
+                    alert.setDuration(3000)
                     alert.enableSwipeToDismiss()
                     alert.show()
                     frame_layout.animation = shake
@@ -676,8 +691,8 @@ class AddVehicleFragment : Fragment() {
                     equivalencia.requestFocus()
                     equivalencia.error
                     val alert = Alerter.create(requireActivity())
-                    alert.setTitle("Error")
-                    alert.setText("You must provide the equivalence of a dollar in your currency")
+                    alert.setTitle(getString(R.string.error))
+                    alert.setText(getString(R.string.provide_equivalence))
                     alert.setIcon(R.drawable.ic_error)
                     when (context?.resources!!.configuration.uiMode.and(Configuration.UI_MODE_NIGHT_MASK)) {
                         Configuration.UI_MODE_NIGHT_YES -> alert.setBackgroundColorRes(R.color.crimson)
@@ -696,14 +711,14 @@ class AddVehicleFragment : Fragment() {
                     modelMake.requestFocus()
                     modelMake.error
                     val alert = Alerter.create(requireActivity())
-                    alert.setTitle("Error")
-                    alert.setText("You must provide make and model")
+                    alert.setTitle(getString(R.string.error))
+                    alert.setText(getString(R.string.provide_make_and_model))
                     alert.setIcon(R.drawable.ic_error)
                     when (context?.resources!!.configuration.uiMode.and(Configuration.UI_MODE_NIGHT_MASK)) {
                         Configuration.UI_MODE_NIGHT_YES -> alert.setBackgroundColorRes(R.color.crimson)
                         Configuration.UI_MODE_NIGHT_NO -> alert.setBackgroundColorRes(R.color.crimson_day)
                     }
-                    alert.setDuration(4500)
+                    alert.setDuration(3000)
                     alert.enableSwipeToDismiss()
                     alert.show()
                     frame_layout.animation = shake
@@ -712,14 +727,14 @@ class AddVehicleFragment : Fragment() {
                     manufacturingYear.requestFocus()
                     manufacturingYear.error
                     val alert = Alerter.create(requireActivity())
-                    alert.setTitle("Error")
-                    alert.setText("You must provide the manufacturing year")
+                    alert.setTitle(getString(R.string.error))
+                    alert.setText(getString(R.string.provide_year_of_manufacture))
                     alert.setIcon(R.drawable.ic_error)
                     when (context?.resources!!.configuration.uiMode.and(Configuration.UI_MODE_NIGHT_MASK)) {
                         Configuration.UI_MODE_NIGHT_YES -> alert.setBackgroundColorRes(R.color.crimson)
                         Configuration.UI_MODE_NIGHT_NO -> alert.setBackgroundColorRes(R.color.crimson_day)
                     }
-                    alert.setDuration(4500)
+                    alert.setDuration(3000)
                     alert.enableSwipeToDismiss()
                     alert.show()
                     frame_layout.animation = shake
@@ -728,14 +743,14 @@ class AddVehicleFragment : Fragment() {
                     price.requestFocus()
                     price.error
                     val alert = Alerter.create(requireActivity())
-                    alert.setTitle("Error")
-                    alert.setText("You must provide the price")
+                    alert.setTitle(getString(R.string.error))
+                    alert.setText(getString(R.string.provide_price))
                     alert.setIcon(R.drawable.ic_error)
                     when (context?.resources!!.configuration.uiMode.and(Configuration.UI_MODE_NIGHT_MASK)) {
                         Configuration.UI_MODE_NIGHT_YES -> alert.setBackgroundColorRes(R.color.crimson)
                         Configuration.UI_MODE_NIGHT_NO -> alert.setBackgroundColorRes(R.color.crimson_day)
                     }
-                    alert.setDuration(4500)
+                    alert.setDuration(3000)
                     alert.enableSwipeToDismiss()
                     alert.show()
                     frame_layout.animation = shake
@@ -743,8 +758,8 @@ class AddVehicleFragment : Fragment() {
                 odometerRead.editText?.text.isNullOrEmpty() -> {
                     odometerRead.requestFocus()
                     val alert = Alerter.create(requireActivity())
-                    alert.setTitle("Error")
-                    alert.setText("You must provide the odometer reading")
+                    alert.setTitle(getString(R.string.error))
+                    alert.setText(getString(R.string.provide_odometer_reading))
                     alert.setIcon(R.drawable.ic_error)
                     when (context?.resources!!.configuration.uiMode.and(Configuration.UI_MODE_NIGHT_MASK)) {
                         Configuration.UI_MODE_NIGHT_YES -> alert.setBackgroundColorRes(R.color.crimson)
@@ -757,14 +772,14 @@ class AddVehicleFragment : Fragment() {
                 }
                 else -> {
                     val alert = Alerter.create(requireActivity())
-                    alert.setTitle("Error")
-                    alert.setText("You must fill all the fields")
+                    alert.setTitle(getString(R.string.error))
+                    alert.setText(getString(R.string.fill_all_the_fields))
                     alert.setIcon(R.drawable.ic_error)
                     when (context?.resources!!.configuration.uiMode.and(Configuration.UI_MODE_NIGHT_MASK)) {
                         Configuration.UI_MODE_NIGHT_YES -> alert.setBackgroundColorRes(R.color.crimson)
                         Configuration.UI_MODE_NIGHT_NO -> alert.setBackgroundColorRes(R.color.crimson_day)
                     }
-                    alert.setDuration(4500)
+                    alert.setDuration(3000)
                     alert.enableSwipeToDismiss()
                     alert.show()
                     frame_layout.animation = shake

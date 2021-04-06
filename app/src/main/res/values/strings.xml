@@ -47,7 +47,6 @@
     <string name="pesos_example">E.g. 2750 Pesos</string>
     <string name="_25000">20000</string>
     <string name="_300000">250000</string>
-    <string name="june">JUNE</string>
     <string name="month">Month</string>
     <string name="year_example">E.g. 2008</string>
     <string name="history">History</string>
@@ -88,4 +87,23 @@
     <string name="vehicle_score">Vehicle score:</string>
     <string name="success">Success!</string>
     <string name="vehicle_added">Your vehicle has been added</string>
+    <string name="error">Error</string>
+    <string name="provide_year_of_manufacture">You must provide the year of manufacture</string>
+    <string name="provide_price">You must provide a price</string>
+    <string name="provide_equivalence">You must provide the equivalence of a dollar in your currency</string>
+    <string name="january">JANUARY</string>
+    <string name="february">FEBRUARY</string>
+    <string name="march">MARCH</string>
+    <string name="april">APRIL</string>
+    <string name="may">MAY</string>
+    <string name="june">JUNE</string>
+    <string name="july">JULY</string>
+    <string name="august">AUGUST</string>
+    <string name="september">SEPTEMBER</string>
+    <string name="october">OCTOBER</string>
+    <string name="november">NOVEMBER</string>
+    <string name="december">DECEMBER</string>
+    <string name="provide_make_and_model">You must provide make and model</string>
+    <string name="provide_odometer_reading">You must provide the odometer reading</string>
+    <string name="fill_all_the_fields">You must fill all the fields</string>
 </resources>
