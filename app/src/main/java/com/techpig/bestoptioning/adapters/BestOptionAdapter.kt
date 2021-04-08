@@ -1,4 +1,4 @@
-package com.techpig.bestoptioning
+package com.techpig.bestoptioning.adapters
 
 import android.content.Context
 import android.content.res.Configuration
@@ -9,9 +9,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.techpig.bestoptioning.ResultFragment.Companion.boBpr
-import com.techpig.bestoptioning.ResultFragment.Companion.boScore
-import com.techpig.bestoptioning.ResultFragment.Companion.boTitle
+import com.techpig.bestoptioning.R
+import com.techpig.bestoptioning.models.Vehicle
+import com.techpig.bestoptioning.models.VehicleObject
 import kotlinx.android.synthetic.main.card_item_layout.view.*
 import java.text.DecimalFormat
 import java.util.*

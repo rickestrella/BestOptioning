@@ -1,4 +1,4 @@
-package com.techpig.bestoptioning
+package com.techpig.bestoptioning.fragments
 
 import android.content.Context
 import android.content.SharedPreferences
@@ -6,7 +6,6 @@ import android.content.res.Configuration
 import android.graphics.Color
 import android.os.Bundle
 import android.text.SpannableStringBuilder
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -21,8 +20,11 @@ import com.google.android.material.radiobutton.MaterialRadioButton
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
 import com.tapadoo.alerter.Alerter
-import com.techpig.bestoptioning.ContainerActivity.Companion.chipNavBar
-import com.techpig.bestoptioning.ContainerActivity.Companion.frame_layout
+import com.techpig.bestoptioning.R
+import com.techpig.bestoptioning.models.Vehicle
+import com.techpig.bestoptioning.activities.ContainerActivity
+import com.techpig.bestoptioning.activities.ContainerActivity.Companion.chipNavBar
+import com.techpig.bestoptioning.activities.ContainerActivity.Companion.frame_layout
 import java.time.LocalDate
 import java.util.*
 import kotlin.math.pow
@@ -32,11 +34,6 @@ class AddVehicleFragment : Fragment() {
     private val calendar = Calendar.getInstance()
     private val currentYear = calendar[Calendar.YEAR]
     private val currentMonth = calendar[Calendar.MONTH]
-
-    private val newMkE = 250000
-    private var savedMkEnd = 0
-    private val newMkY = 20000
-    private var savedMkYear = 0
 
     private var chosenMonth: Long = 6
     private var bestPossibleMatch = 0f
@@ -48,16 +45,12 @@ class AddVehicleFragment : Fragment() {
 
     private var fieldEmpty = true
 
-    private var CHOSEN_CURRENCY = 0
-
     //SharedPreferences
     private var prefs: SharedPreferences? = null
     private val PREFS_FILENAME = "com.techpig.bestoptioning.prefs"
 
-    private val MILEAGE_YEAR = "mileYear"
-    private val MILEAGE_END = "mileEnd"
     private val READING_UNIT = "reading_unit"
-
+    private var CHOSEN_CURRENCY = 0
 
     //Objects
 
@@ -121,8 +114,12 @@ class AddVehicleFragment : Fragment() {
         mkEndInfoTv = v.findViewById(R.id.mkEndInfoTv)
         vehicleInfoCard = v.findViewById(R.id.vehicleInfoCard)
         usageInfoCard = v.findViewById(R.id.usageInfoCard)
+
         val mke = v.findViewById<TextInputEditText>(R.id.et_mke)
         val mky = v.findViewById<TextInputEditText>(R.id.et_mky)
+
+        mkEnd.editText!!.text = SpannableStringBuilder(getString(R.string._250000))
+        mkYear.editText!!.text = SpannableStringBuilder(getString(R.string._20000))
 
         prefs = activity?.applicationContext!!.getSharedPreferences(
             PREFS_FILENAME,
@@ -329,32 +326,6 @@ class AddVehicleFragment : Fragment() {
             }
         }
 
-        if (prefs!!.getInt(MILEAGE_YEAR, 0).toString().trim { it <= ' ' }
-                .isEmpty() || prefs!!.getInt(MILEAGE_YEAR, 0) == 0) {
-            mky.text = SpannableStringBuilder("$newMkY")
-        } else {
-            savedMkYear = prefs!!.getInt(MILEAGE_YEAR, 0)
-            mky.text = SpannableStringBuilder(
-                prefs!!.getInt(MILEAGE_YEAR, 0).toString()
-            )
-        }
-
-        if (prefs!!.getInt(MILEAGE_END, 0).toString().trim { it <= ' ' }
-                .isEmpty() || prefs!!.getInt(MILEAGE_END, 0) == 0) {
-            mke.text = SpannableStringBuilder("$newMkE")
-        } else {
-            savedMkEnd = prefs!!.getInt(MILEAGE_END, 0)
-            mke.text = SpannableStringBuilder(
-                prefs!!.getInt(MILEAGE_END, 0).toString()
-            )
-        }
-
-        if (CHOSEN_CURRENCY == 2) {
-            val sharedPreferencesSavedValue = prefs!!.getFloat("CURRENCY_EQ", 0f)
-            if (prefs!!.getFloat("CURRENCY_EQ", 0f).toString().isNotEmpty()) {
-                equivalencia.editText?.setText("${trimTrailingZero(sharedPreferencesSavedValue.toString())}")
-            }
-        }
         otherCheckBox.setOnCheckedChangeListener { _, _ ->
             // Responds to checkbox being checked/unchecked
             if (otherCheckBox.isChecked) {
@@ -462,10 +433,6 @@ class AddVehicleFragment : Fragment() {
                 ContainerActivity.closest = bestOption()
                 ContainerActivity.bestPM = bestPossibleMatch
 
-//                @Suppress("DEPRECATION")
-//                fragmentManager?.beginTransaction()!!
-//                    .replace(R.id.frameLayout, ListVehicleFragment()).addToBackStack("listVehicle")
-//                    .commit()
                 val alert = Alerter.create(requireActivity())
                 alert.setTitle(R.string.success)
                 alert.setText(R.string.vehicle_added)
@@ -480,15 +447,6 @@ class AddVehicleFragment : Fragment() {
                 chipNavBar.setItemSelected(R.id.list_menu, true)
             }
 
-            if (mky.editableText.toString().toInt() != savedMkYear) {
-                editor!!.putInt(MILEAGE_YEAR, mky.editableText.toString().toInt())
-                editor.apply()
-            }
-
-            if (mke.editableText.toString().toInt() != savedMkEnd) {
-                editor!!.putInt(MILEAGE_END, mke.editableText.toString().toInt())
-                editor.apply()
-            }
             val unitPicked = unitPicker.editText!!.text.toString()
 
             when (unitPicked) {
@@ -605,7 +563,7 @@ class AddVehicleFragment : Fragment() {
         } else {
             val alert = Alerter.create(requireActivity())
             alert.setTitle(getString(R.string.error))
-            alert.setText("You must provide a year between 1920 and $currentYear")
+            alert.setText(getString(R.string.must_provide_a_year_between) + currentYear)
             alert.setIcon(R.drawable.ic_error)
             when (context?.resources!!.configuration.uiMode.and(Configuration.UI_MODE_NIGHT_MASK)) {
                 Configuration.UI_MODE_NIGHT_YES -> alert.setBackgroundColorRes(R.color.crimson)

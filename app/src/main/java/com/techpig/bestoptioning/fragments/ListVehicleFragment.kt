@@ -1,4 +1,4 @@
-package com.techpig.bestoptioning
+package com.techpig.bestoptioning.fragments
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -10,7 +10,10 @@ import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.button.MaterialButton
-import com.techpig.bestoptioning.ContainerActivity.Companion.chipNavBar
+import com.techpig.bestoptioning.R
+import com.techpig.bestoptioning.models.Vehicle
+import com.techpig.bestoptioning.adapters.VehicleListAdapter
+import com.techpig.bestoptioning.activities.ContainerActivity.Companion.chipNavBar
 
 class ListVehicleFragment : Fragment() {
 

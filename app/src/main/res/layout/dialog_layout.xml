@@ -55,7 +55,6 @@
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="8dp"
                         android:gravity="center_horizontal"
-                        android:text="Nissan / Versa"
                         android:textSize="22sp"
                         android:textStyle="bold" />
 
@@ -64,7 +63,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="8dp"
                         android:gravity="center_horizontal"
-                        android:text="Your Best Option!"
+                        android:text="@string/your_best_option_label"
                         android:textSize="20sp"
                         android:textStyle="bold|italic" />
 
@@ -79,7 +78,6 @@
                         android:id="@+id/dialog_vehicle_score"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="2365.2361"
                         android:textSize="16sp" />
 
                 </LinearLayout>
@@ -109,7 +107,7 @@
         android:clickable="true"
         android:focusable="true"
         android:focusedByDefault="true"
-        android:text="See results"
+        android:text="@string/see_results"
         app:layout_constraintBottom_toBottomOf="@+id/crl"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

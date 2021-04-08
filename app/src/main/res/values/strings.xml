@@ -1,12 +1,12 @@
 <resources>
     <string name="app_name">Best Optioning</string>
-    <string name="vehicle_list">Vehicle list</string>
+    <string name="vehicle_list">Vehicle List</string>
     <string name="add_vehicle">Add Vehicle</string>
     <string name="result">Results</string>
     <string name="cool_way">A cool way to pick your car</string>
     <string name="madeBy">©TechPig 2021</string>
     <string name="title">Best Optioning Title</string>
-    <string name="subtitle">Best Optioning slogan</string>
+    <string name="subtitle">Best Optioning subtitle</string>
     <string name="vehicle_make">E.g. Nissan/Versa</string>
     <string name="required_vehicle_information">Required Vehicle Information</string>
     <string name="date_of_manufacturing">Year and month of manufacture</string>
@@ -39,8 +39,8 @@
     <string name="odometerReading">Enter present odometer reading in either km or mi.</string>
     <string name="costs">Include in this entry any additional costs of extras or repairs if needed.</string>
     <string name="costs_2">Include in the price entries any additional costs for extras or repairs if needed.</string>
-    <string name="mk_end_tv">Estimated number of mi/km when you wouldn\'t like to drive this vehicle ANYMORE. \nIf not sure, leave the default value.</string>
-    <string name="mk_year_tv">Enter the estimated number of mi/km you would drive this vehicle in ONE YEAR. \nIf not sure, leave the default value.</string>
+    <string name="mk_end_tv">Estimated number of mi/km when you wouldn\'t like to drive this vehicle ANYMORE.  If not sure, leave the default value.</string>
+    <string name="mk_year_tv">Enter the estimated number of mi/km you would drive this vehicle in ONE YEAR.  If not sure, leave the default value.</string>
     <string name="results">Results</string>
     <string name="other_currencies">FOR OTHER CURRENCIES</string>
     <string name="_1usd">1 US$ =</string>
@@ -51,11 +51,10 @@
     <string name="year_example">E.g. 2008</string>
     <string name="history">History</string>
     <string name="compare">Compare</string>
-    <string name="vehicle_list_title">Enter the required vehicle and usage information of 2 or more comparable vehicles.</string>
+    <string name="vehicle_list_title">The required vehicle and usage information that you have entered in this list, is the only data which will be processed to obtain the results shown on the next page.</string>
     <string name="share">Share</string>
     <string name="rate_us">Rate us</string>
     <string name="support">Support</string>
-    <string name="email_message"> </string>
     <string name="email_subject">BestOptioning Support</string>
     <string name="coose_one">Choose One</string>
     <string name="new_comparison">New Comparison</string>
@@ -77,7 +76,7 @@
     <string name="best_bet_text"><i><b>best-bet.</b></i></string>
     <string name="best_option_text"><i><b>It\'s your BEST-OPTION!</b></i></string>
     <string name="best_bet_desc_bottom">The vehicle with the lowest <b>UCN</b> is your </string>
-    <string name="vin_ucn_relations_desc">The vehicle with the closest value to the <b>bpr</b>:</string>
+    <string name="vin_ucn_relations_desc">The vehicle with the closest value to the <b>BPR</b>:</string>
     <string name="mileage_info">Mileage</string>
     <string name="make_model">Make/Model</string>
     <string name="price_of_vehicle">Price of the vehicle</string>
@@ -107,4 +106,20 @@
     <string name="provide_odometer_reading">You must provide the odometer reading</string>
     <string name="fill_all_the_fields">You must fill all the fields</string>
     <string name="vehicle_removed">Vehicle removed</string>
+    <string name="thank_you_for_your_support">Thank you for your support!</string>
+    <string name="donate_label">Donate</string>
+    <string name="other_amount">Other amount</string>
+    <string name="disconnected">Disconnected</string>
+    <string name="connected">Connected</string>
+    <string name="billing_not_ready">Billing client not ready</string>
+    <string name="price_in_your_currency">Price in your currency</string>
+    <string name="email_message">" "</string>
+    <string name="must_provide_a_year_between">"You must provide a year between 1920 and "</string>
+    <string name="_250000">250000</string>
+    <string name="_20000">20000</string>
+    <string name="your_best_option_label">Your Best Option!</string>
+    <string name="see_results">See results</string>
+    <string name="pay_as_you_wish">Pay as you wish</string>
+    <string name="_1_usd">$1 USD</string>
+    <string name="remove_button">X</string>
 </resources>

@@ -1,6 +1,6 @@
-package com.techpig.bestoptioning
+package com.techpig.bestoptioning.models
 
-class Vehicle(vehicleObject: VehicleObject) {
+class Vehicle {
 
     companion object {
         val vehicles: ArrayList<VehicleObject> = ArrayList()

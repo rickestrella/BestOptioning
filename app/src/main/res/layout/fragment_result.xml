@@ -4,13 +4,14 @@
     android:id="@+id/result_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ResultFragment">
+    tools:context=".fragments.ResultFragment">
 
     <LinearLayout
         android:id="@+id/resultsLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        tools:ignore="UselessParent">
 
         <ScrollView
             android:layout_width="match_parent"
@@ -141,7 +142,8 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="3"
-                            android:text="@string/best_possible_match_between_both_indicators" />
+                            android:text="@string/best_possible_match_between_both_indicators"
+                            tools:ignore="NestedWeights" />
 
                         <TextView
                             android:id="@+id/bpmScore"
@@ -190,12 +192,13 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:orientation="horizontal">
+
                             <TextView
                                 style="@style/TextAppearance.AppCompat.Light.SearchResult.Subtitle"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:textAlignment="textStart"
-                                android:text="@string/best_option_text" />
+                                android:text="@string/best_option_text"
+                                android:textAlignment="textStart" />
                         </LinearLayout>
 
                     </LinearLayout>
@@ -209,8 +212,8 @@
             android:id="@+id/buttonLL"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:baselineAligned="false"
             android:background="@android:color/transparent"
+            android:baselineAligned="false"
             android:gravity="center_horizontal"
             android:orientation="horizontal">
 
@@ -238,7 +241,7 @@
                     android:id="@+id/donateButton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Pay as you wish" />
+                    android:text="@string/pay_as_you_wish" />
             </LinearLayout>
 
         </LinearLayout>

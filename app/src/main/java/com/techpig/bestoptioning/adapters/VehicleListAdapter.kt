@@ -1,17 +1,18 @@
-package com.techpig.bestoptioning
+package com.techpig.bestoptioning.adapters
 
-import android.app.Activity
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.res.Configuration
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.techpig.bestoptioning.ContainerActivity.Companion.chipNavBar
-import com.techpig.bestoptioning.ListVehicleFragment.Companion.addVButton
-import com.techpig.bestoptioning.ListVehicleFragment.Companion.cmpButton
+import com.techpig.bestoptioning.R
+import com.techpig.bestoptioning.activities.ContainerActivity.Companion.chipNavBar
+import com.techpig.bestoptioning.fragments.ListVehicleFragment.Companion.addVButton
+import com.techpig.bestoptioning.fragments.ListVehicleFragment.Companion.cmpButton
+import com.techpig.bestoptioning.models.VehicleObject
 import kotlinx.android.synthetic.main.vehicles_list_layout.view.*
-import java.text.DecimalFormat
 
 class VehicleListAdapter(val context: Context, private val items: ArrayList<VehicleObject>) :
     RecyclerView.Adapter<VehicleListAdapter.ViewHolder>() {
@@ -34,6 +35,7 @@ class VehicleListAdapter(val context: Context, private val items: ArrayList<Vehi
         }
     }
 
+    @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = items[position]
 

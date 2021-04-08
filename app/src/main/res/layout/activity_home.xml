@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".HomeActivity">
+    tools:context=".activities.HomeActivity">
 
     <LinearLayout
         android:id="@+id/mainTitle"
@@ -50,10 +50,9 @@
         android:gravity="center"
         android:lineHeight="20dp"
         android:padding="8dp"
-        android:text="It's meant to help car buyers decide which car to buy.
-        \nAfter the Required VEHICLE and USAGE information of 2 or more comparable vehicles has been entered, this app will generate numerical indicators for each car to compare their values and reflect which one could be your ..."
         android:textColor="@color/black"
-        android:textSize="16sp" />
+        android:textSize="16sp"
+        tools:targetApi="p" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/addVehicleMainButton"

@@ -33,7 +33,6 @@
                     android:id="@+id/vehicleListTitle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Nissan Sentra"
                     android:textSize="18sp"
                     android:textColor="@color/card_title_night"
                     android:textStyle="bold" />
@@ -50,7 +49,6 @@
                         android:layout_height="wrap_content"
                         android:textSize="13sp"
                         android:textColor="@color/card_text_night"
-                        android:text="2020/06"
                         android:textStyle="bold" />
 
                     <TextView
@@ -58,26 +56,26 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginHorizontal="50dp"
+                        android:gravity="center"
                         android:layout_weight="2.3"
                         android:textSize="13sp"
                         android:textColor="@color/card_text_night"
-                        android:text="20000 Km"
                         android:textStyle="bold" />
 
                     <TextView
                         android:id="@+id/vehicleListPrice"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1.7"
+                        android:layout_weight="2"
                         android:textSize="13sp"
                         android:textColor="@color/card_text_night"
-                        android:text="$50000"
                         android:textStyle="bold" />
                 </LinearLayout>
 
             </LinearLayout>
 
             <ImageView
+                android:contentDescription="@string/remove_button"
                 android:layout_width="0dp"
                 android:padding="2dp"
                 android:layout_height="match_parent"

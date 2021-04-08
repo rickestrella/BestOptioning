@@ -1,4 +1,4 @@
-package com.techpig.bestoptioning
+package com.techpig.bestoptioning.activities
 
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity

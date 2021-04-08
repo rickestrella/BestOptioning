@@ -1,9 +1,8 @@
-package com.techpig.bestoptioning
+package com.techpig.bestoptioning.activities
 
 import android.content.Intent
 import android.content.res.Configuration
 import android.graphics.Color
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.view.animation.Animation
@@ -12,6 +11,7 @@ import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.RelativeLayout
 import android.widget.TextView
+import com.techpig.bestoptioning.R
 
 class MainActivity : BaseActivity() {
 

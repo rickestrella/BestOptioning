@@ -1,22 +1,32 @@
-package com.techpig.bestoptioning
+package com.techpig.bestoptioning.fragments
 
 import android.app.AlertDialog
 import android.content.Intent
 import android.content.res.Configuration
 import android.graphics.Color
-import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.*
+import android.widget.Button
+import android.widget.FrameLayout
+import android.widget.TextView
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.android.billingclient.api.*
+import com.techpig.bestoptioning.R
+import com.techpig.bestoptioning.activities.HomeActivity
+import com.techpig.bestoptioning.adapters.BestBetAdapter
+import com.techpig.bestoptioning.adapters.BestChoiceAdapter
+import com.techpig.bestoptioning.adapters.BestOptionAdapter
+import com.techpig.bestoptioning.models.Vehicle
 import nl.dionsegijn.konfetti.KonfettiView
 import nl.dionsegijn.konfetti.models.Shape
 import nl.dionsegijn.konfetti.models.Size
 import java.text.DecimalFormat
+import java.util.*
 import kotlin.math.abs
 
 class ResultFragment : Fragment() {
@@ -55,6 +65,11 @@ class ResultFragment : Fragment() {
         bestBetRv = v.findViewById(R.id.bestBetRv)
         bestOptionRv = v.findViewById(R.id.bestOptionRv)
 
+        ////////////////////////////////// Billing /////////////////////////////////////////////////
+
+
+
+        ////////////////////////////////////////////////////////////////////////////////////////////
 
         when (context?.resources!!.configuration.uiMode.and(Configuration.UI_MODE_NIGHT_MASK)) {
             Configuration.UI_MODE_NIGHT_YES -> result_layout.setBackgroundColor(Color.parseColor("#141414"))
@@ -84,16 +99,33 @@ class ResultFragment : Fragment() {
 
 
         donateButton.setOnClickListener {
-            val webIntent = Intent(
-                Intent.ACTION_VIEW,
-                Uri.parse("http://www.google.com/")
-            ) //TODO: Cambiar el URI por el boton de donar
-            startActivity(webIntent)
+            billingDialog()
         }
 
         popDialog()
 
         return v
+    }
+
+    private fun billingDialog() {
+        val builder = AlertDialog.Builder(requireContext())
+        val alertLayout = layoutInflater.inflate(R.layout.billing_dialog, null)
+        builder.setView(alertLayout)
+        val dialog = builder.create()
+        dialog.show()
+        val cancelButton = dialog.findViewById<Button>(R.id.cancelPayment)
+        val purchaseOptionsRv = dialog.findViewById<RecyclerView>(R.id.optionsRv)
+
+        purchaseOptionsRv.layoutManager = LinearLayoutManager(requireActivity().applicationContext)
+
+
+        cancelButton.setOnClickListener {
+            dialog.dismiss()
+        }
+
+        dialog.setCancelable(false)
+        dialog.window?.setBackgroundDrawableResource(android.R.color.transparent)
+
     }
 
     private fun popDialog() {

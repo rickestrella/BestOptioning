@@ -1,4 +1,4 @@
-package com.techpig.bestoptioning
+package com.techpig.bestoptioning.adapters
 
 import android.content.Context
 import android.content.res.Configuration
@@ -9,36 +9,29 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.techpig.bestoptioning.R
+import com.techpig.bestoptioning.models.VehicleObject
 import kotlinx.android.synthetic.main.card_item_layout.view.*
 import java.text.DecimalFormat
 
-class BestChoiceAdapter(val context: Context, val items: ArrayList<VehicleObject>) :
-    RecyclerView.Adapter<BestChoiceAdapter.ViewHolder>() {
-
-    var highestV = 0f
+class BestBetAdapter(val context: Context, private val items: ArrayList<VehicleObject>) :
+    RecyclerView.Adapter<BestBetAdapter.ViewHolder>() {
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         //CardView
-        val cardTitle = itemView.cardModelMake
-        val cardScore = itemView.cardScore
-        val containerCard = itemView.containerCard
+        val cardTitle = itemView.cardModelMake!!
+        val cardScore = itemView.cardScore!!
+        val containerCard = itemView.containerCard!!
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        return if ((context.applicationContext!!.resources.configuration.uiMode.and(Configuration.UI_MODE_NIGHT_MASK)) == Configuration.UI_MODE_NIGHT_YES) {
-            ViewHolder(
-                LayoutInflater.from(context).inflate(R.layout.card_item_layout_night, parent, false)
-            )
-        } else {
-            ViewHolder(
-                LayoutInflater.from(context).inflate(R.layout.card_item_layout, parent, false)
-            )
-        }
+        return ViewHolder(
+            LayoutInflater.from(context).inflate(R.layout.card_item_layout, parent, false)
+        )
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = items[position]
-        // Vehicle Results
 
         fun formatNumber(number: Float): Float {
             val df = DecimalFormat("####.####")
@@ -49,29 +42,25 @@ class BestChoiceAdapter(val context: Context, val items: ArrayList<VehicleObject
         holder.cardTitle.isSelected = true
         holder.cardTitle.setSingleLine()
         holder.cardTitle.ellipsize = TextUtils.TruncateAt.MARQUEE
-        val cardScoreFourDigits = formatNumber(item.getVin()).toString()
-        holder.cardScore.text = cardScoreFourDigits
+        val cardScoreFourDigits = formatNumber(item.getUcn())
+        holder.cardScore.text = "$cardScoreFourDigits"
 
-        fun highestVin() {
+        val cardScoree = holder.cardScore.text.toString()
+        var lowestUcn = 999999f
+
+        fun lowestUcn() {
             for (i in items) {
-                if (i.getVin() > highestV) {
-                    highestV = i.getVin()
+                if (i.getUcn() < lowestUcn) {
+                    lowestUcn = i.getUcn()
                 }
             }
         }
+        lowestUcn()
 
-        highestVin()
-
-        highestV
-
-        // Best Choice = highest VIN
-        // Best bet = lowest UCIN
-        // BPM = highest vin / lowest ucin
-        // Best Option =  Lo mas cercano a BPM
-        // val hs = getHighestScore(cardScoree)
+        val bbstr = formatNumber(lowestUcn).toString()
 
         if ((context.applicationContext!!.resources.configuration.uiMode.and(Configuration.UI_MODE_NIGHT_MASK)) == Configuration.UI_MODE_NIGHT_YES) {
-            if (item.getVin() == highestV) {
+            if (cardScoree == bbstr) {
                 holder.containerCard.setCardBackgroundColor(Color.parseColor("#0E4D00"))
                 holder.cardTitle.setTextColor(Color.parseColor("#A0F779"))
                 holder.cardScore.setTextColor(Color.parseColor("#EAEAEA"))
@@ -85,7 +74,7 @@ class BestChoiceAdapter(val context: Context, val items: ArrayList<VehicleObject
                 holder.containerCard.cardElevation = 6f
             }
         } else {
-            if (item.getVin() == highestV) {
+            if (cardScoree == bbstr) {
                 holder.containerCard.setCardBackgroundColor(Color.parseColor("#348A36"))
                 holder.cardTitle.setTextColor(Color.parseColor("#FFFFFF"))
                 holder.cardScore.setTextColor(Color.parseColor("#EAEAEA"))
@@ -100,6 +89,7 @@ class BestChoiceAdapter(val context: Context, val items: ArrayList<VehicleObject
                 holder.containerCard.cardElevation = 6f
             }
         }
+
     }
 
     override fun getItemCount(): Int {

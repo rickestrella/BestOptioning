@@ -1,4 +1,4 @@
-package com.techpig.bestoptioning
+package com.techpig.bestoptioning.models
 
 class VehicleObject(
     private var modelMake: String,

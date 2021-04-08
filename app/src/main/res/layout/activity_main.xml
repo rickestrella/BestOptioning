@@ -7,7 +7,7 @@
     android:gravity="center"
     android:id="@+id/mainLayout"
     android:orientation="vertical"
-    tools:context=".MainActivity">
+    tools:context=".activities.MainActivity">
 
     <LinearLayout
         android:id="@+id/mainTitle"

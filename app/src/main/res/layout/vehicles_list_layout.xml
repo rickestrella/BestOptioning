@@ -32,7 +32,6 @@
                     android:id="@+id/vehicleListTitle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Nissan Sentra"
                     android:textColor="#4B4B4B"
                     android:textSize="18sp"
                     android:textStyle="bold" />
@@ -47,7 +46,6 @@
                         android:id="@+id/vehicleListManufacturedDate"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="2020/06"
                         android:textColor="#4B4B4B"
                         android:textSize="13sp"
                         android:textStyle="bold" />
@@ -58,7 +56,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginHorizontal="50dp"
                         android:layout_weight="2.3"
-                        android:text="20000 Km"
+                        android:gravity="center"
                         android:textColor="#4B4B4B"
                         android:textSize="13sp"
                         android:textStyle="bold" />
@@ -67,8 +65,7 @@
                         android:id="@+id/vehicleListPrice"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1.7"
-                        android:text="$50000"
+                        android:layout_weight="2"
                         android:textColor="#4B4B4B"
                         android:textSize="13sp"
                         android:textStyle="bold" />
@@ -77,6 +74,7 @@
             </LinearLayout>
 
             <ImageView
+                android:contentDescription="@string/remove_button"
                 android:id="@+id/deleteCarListedButton"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"

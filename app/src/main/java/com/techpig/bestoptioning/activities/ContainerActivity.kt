@@ -1,5 +1,6 @@
-package com.techpig.bestoptioning
+package com.techpig.bestoptioning.activities
 
+import android.annotation.SuppressLint
 import android.content.ActivityNotFoundException
 import android.content.Intent
 import android.content.res.Configuration
@@ -12,10 +13,16 @@ import android.view.WindowManager
 import android.widget.FrameLayout
 import android.widget.Toast
 import androidx.core.content.res.ResourcesCompat
+import com.android.billingclient.api.BillingClient
+import com.android.billingclient.api.BillingClientStateListener
+import com.android.billingclient.api.BillingResult
 import com.ismaeldivita.chipnavigation.BuildConfig
 import com.ismaeldivita.chipnavigation.ChipNavigationBar
-import com.tapadoo.alerter.Alerter
-import com.techpig.bestoptioning.Vehicle.Companion.vehicles
+import com.techpig.bestoptioning.R
+import com.techpig.bestoptioning.fragments.AddVehicleFragment
+import com.techpig.bestoptioning.fragments.ListVehicleFragment
+import com.techpig.bestoptioning.fragments.ResultFragment
+import com.techpig.bestoptioning.models.Vehicle.Companion.vehicles
 import kotlin.system.exitProcess
 
 class ContainerActivity : BaseActivity() {
@@ -23,6 +30,7 @@ class ContainerActivity : BaseActivity() {
     private var backPressedTime = 0L
     private var aClass: Class<*>? = null
     private var frag = ""
+
 
     companion object {
         var ucn_value = 0f
@@ -33,6 +41,7 @@ class ContainerActivity : BaseActivity() {
         var closest = 0f
         var bestPM = 0f
         lateinit var chipNavBar: ChipNavigationBar
+        @SuppressLint("StaticFieldLeak")
         lateinit var frame_layout: FrameLayout
 
     }
@@ -84,13 +93,13 @@ class ContainerActivity : BaseActivity() {
                         openFragment()
                     }
                     R.id.list_menu -> {
-                        supportActionBar!!.title = "Vehicle List"
+                        supportActionBar!!.title = getString(R.string.vehicle_list)
                         frag = "listVehicle"
                         aClass = ListVehicleFragment::class.java
                         openFragment()
                     }
                     R.id.result_menu -> {
-                        supportActionBar!!.title = "Results"
+                        supportActionBar!!.title = getString(R.string.results)
                         frag = "results"
                         aClass = ResultFragment::class.java
                         openFragment()
