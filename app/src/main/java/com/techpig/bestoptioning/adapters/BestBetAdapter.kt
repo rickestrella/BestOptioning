@@ -10,9 +10,11 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.techpig.bestoptioning.R
+import com.techpig.bestoptioning.fragments.BaseFragment
 import com.techpig.bestoptioning.models.VehicleObject
 import kotlinx.android.synthetic.main.card_item_layout.view.*
 import java.text.DecimalFormat
+import java.util.*
 
 class BestBetAdapter(val context: Context, private val items: ArrayList<VehicleObject>) :
     RecyclerView.Adapter<BestBetAdapter.ViewHolder>() {
@@ -42,8 +44,16 @@ class BestBetAdapter(val context: Context, private val items: ArrayList<VehicleO
         holder.cardTitle.isSelected = true
         holder.cardTitle.setSingleLine()
         holder.cardTitle.ellipsize = TextUtils.TruncateAt.MARQUEE
-        val cardScoreFourDigits = formatNumber(item.getUcn())
-        holder.cardScore.text = "$cardScoreFourDigits"
+        val cardScoreFourDigits = if (Locale.getDefault().displayLanguage == Locale.getDefault()
+                .getDisplayLanguage(
+                    Locale.forLanguageTag("es")
+                )
+        ) {
+            String.format("%.4f", BaseFragment().replaceSymbol(item.getUcn().toString()))
+        } else {
+            formatNumber(item.getUcn()).toString()
+        }
+        holder.cardScore.text = cardScoreFourDigits
 
         val cardScoree = holder.cardScore.text.toString()
         var lowestUcn = 999999f
@@ -57,7 +67,15 @@ class BestBetAdapter(val context: Context, private val items: ArrayList<VehicleO
         }
         lowestUcn()
 
-        val bbstr = formatNumber(lowestUcn).toString()
+        val bbstr = if (Locale.getDefault().displayLanguage == Locale.getDefault()
+                .getDisplayLanguage(
+                    Locale.forLanguageTag("es")
+                )
+        ) {
+            String.format("%.4f", BaseFragment().replaceSymbol(lowestUcn.toString()))
+        } else {
+            formatNumber(lowestUcn).toString()
+        }
 
         if ((context.applicationContext!!.resources.configuration.uiMode.and(Configuration.UI_MODE_NIGHT_MASK)) == Configuration.UI_MODE_NIGHT_YES) {
             if (cardScoree == bbstr) {
@@ -82,7 +100,7 @@ class BestBetAdapter(val context: Context, private val items: ArrayList<VehicleO
                 holder.containerCard.cardElevation = 12f
             } else {
                 holder.containerCard.setCardBackgroundColor(Color.parseColor("#FFEEB6"))
-                holder.containerCard.setPadding(8,8,8,8)
+                holder.containerCard.setPadding(8, 8, 8, 8)
                 holder.cardTitle.setTextColor(Color.parseColor("#000000"))
                 holder.cardScore.setTextColor(Color.parseColor("#000000"))
                 holder.cardScore.typeface = Typeface.defaultFromStyle(Typeface.NORMAL)

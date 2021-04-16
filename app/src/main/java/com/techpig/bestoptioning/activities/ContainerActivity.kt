@@ -33,17 +33,9 @@ class ContainerActivity : BaseActivity() {
 
 
     companion object {
-        var ucn_value = 0f
-        var vin_value = 0f
-        var cociente_temp = 0f
-        var vu_relation_value = 0f
-
-        var closest = 0f
-        var bestPM = 0f
         lateinit var chipNavBar: ChipNavigationBar
         @SuppressLint("StaticFieldLeak")
         lateinit var frame_layout: FrameLayout
-
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -108,6 +100,7 @@ class ContainerActivity : BaseActivity() {
             }
         })
     }
+
 
     private fun openFragment() {
         try {

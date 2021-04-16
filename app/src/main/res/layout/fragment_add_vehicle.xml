@@ -140,7 +140,7 @@
                                             android:clickable="false"
                                             android:imeOptions="actionNext"
                                             android:inputType="number"
-                                            android:textSize="18sp" />
+                                            android:textSize="16sp" />
                                     </com.google.android.material.textfield.TextInputLayout>
 
                                     <com.google.android.material.textfield.TextInputLayout
@@ -205,6 +205,7 @@
                                         app:startIconDrawable="@drawable/ic_speed">
 
                                         <com.google.android.material.textfield.TextInputEditText
+                                            android:id="@+id/odometer_et"
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
                                             android:hint="@string/current_odometer"
@@ -296,6 +297,7 @@
                                         app:startIconDrawable="@drawable/ic_money">
 
                                         <com.google.android.material.textfield.TextInputEditText
+                                            android:id="@+id/price_et"
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
                                             android:hint="@string/price"
@@ -326,6 +328,7 @@
                                             app:startIconDrawable="@drawable/ic_money">
 
                                             <com.google.android.material.textfield.TextInputEditText
+                                                android:id="@+id/priceNewEt"
                                                 android:layout_width="match_parent"
                                                 android:layout_height="wrap_content"
                                                 android:hint="@string/price"
@@ -346,6 +349,7 @@
                                             app:helperText="@string/pesos_example">
 
                                             <com.google.android.material.textfield.TextInputEditText
+                                                android:id="@+id/equivalencia_et"
                                                 android:layout_width="match_parent"
                                                 android:layout_height="wrap_content"
                                                 android:hint="@string/_1usd"

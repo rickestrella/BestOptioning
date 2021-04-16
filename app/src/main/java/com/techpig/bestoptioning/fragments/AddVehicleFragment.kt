@@ -15,21 +15,20 @@ import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.cardview.widget.CardView
 import androidx.core.view.isVisible
-import androidx.fragment.app.Fragment
 import com.google.android.material.radiobutton.MaterialRadioButton
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
 import com.tapadoo.alerter.Alerter
 import com.techpig.bestoptioning.R
-import com.techpig.bestoptioning.models.Vehicle
-import com.techpig.bestoptioning.activities.ContainerActivity
 import com.techpig.bestoptioning.activities.ContainerActivity.Companion.chipNavBar
 import com.techpig.bestoptioning.activities.ContainerActivity.Companion.frame_layout
+import com.techpig.bestoptioning.models.Vehicle
+import java.text.DecimalFormat
+import java.text.DecimalFormatSymbols
 import java.time.LocalDate
 import java.util.*
-import kotlin.math.pow
 
-class AddVehicleFragment : Fragment() {
+class AddVehicleFragment : BaseFragment() {
 
     private val calendar = Calendar.getInstance()
     private val currentYear = calendar[Calendar.YEAR]
@@ -81,6 +80,18 @@ class AddVehicleFragment : Fragment() {
     private lateinit var vehicleInfoCard: CardView
     private lateinit var usageInfoCard: CardView
 
+    private lateinit var vO: TextInputEditText
+    private lateinit var vP: TextInputEditText
+    private lateinit var vPOC: TextInputEditText
+    private lateinit var vPE: TextInputEditText
+
+    private var vehicleOdometer: Int = 0
+    private var vehiclePrice: Double = 0.0
+    lateinit var vehiclePriceOtherCurrency: String
+    lateinit var vehiclePriceEquivalence: String
+
+    private val formatter = DecimalFormat("0.#", DecimalFormatSymbols.getInstance(Locale.ENGLISH))
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -92,17 +103,25 @@ class AddVehicleFragment : Fragment() {
         monthPicker = v.findViewById(R.id.monthPicker)
         unitPicker = v.findViewById(R.id.unitPicker)
         llOtherCurrencies = v.findViewById(R.id.llOtherCurrencies)
+
         price = v.findViewById(R.id.price)
+
         priceInfo = v.findViewById(R.id.priceInfo)
         cadCheckBox = v.findViewById(R.id.cadCheckBox)
         otherCheckBox = v.findViewById(R.id.otherCheckBox)
+
         equivalencia = v.findViewById(R.id.equivalencia)
+
         addVehicleButton = v.findViewById(R.id.addVehicleButton)
         cancelButton = v.findViewById(R.id.cancelButton)
         manufacturingYear = v.findViewById(R.id.manufacturingYear)
+
         price_new = v.findViewById(R.id.price_new)
+
         modelMake = v.findViewById(R.id.modelMake)
+
         odometerRead = v.findViewById(R.id.odometerRead)
+
         mkEnd = v.findViewById(R.id.mkEnd)
         mkYear = v.findViewById(R.id.mkYear)
         titleTv = v.findViewById(R.id.titleTv)
@@ -117,6 +136,11 @@ class AddVehicleFragment : Fragment() {
 
         val mke = v.findViewById<TextInputEditText>(R.id.et_mke)
         val mky = v.findViewById<TextInputEditText>(R.id.et_mky)
+
+        vO = v.findViewById(R.id.odometer_et)
+        vP = v.findViewById(R.id.price_et)
+        vPOC = v.findViewById(R.id.priceNewEt)
+        vPE = v.findViewById(R.id.equivalencia_et)
 
         mkEnd.editText!!.text = SpannableStringBuilder(getString(R.string._250000))
         mkYear.editText!!.text = SpannableStringBuilder(getString(R.string._20000))
@@ -355,6 +379,10 @@ class AddVehicleFragment : Fragment() {
         val shake = AnimationUtils.loadAnimation(context, R.anim.shake)
 
         addVehicleButton.setOnClickListener {
+            vehicleOdometer = vO.editableText.toString().toInt()
+            vehiclePrice = vP.editableText.toString().toDouble()
+            vehiclePriceOtherCurrency = vPOC.editableText.toString()
+            vehiclePriceEquivalence = vPE.editableText.toString()
             checkFields()
             chosenMonth = monthNumber(monthPicker.editText!!.text.toString())
             if (manufacturingYear.editText?.text.isNullOrEmpty()) {
@@ -412,8 +440,8 @@ class AddVehicleFragment : Fragment() {
                         modelMake.editText!!.text.toString(),
                         chosenMonth,
                         manufacturingYear.editText!!.text.toString().toLong(),
-                        odometerRead.editText?.text.toString().toInt(),
-                        price_new.editText?.text.toString().toDouble(),
+                        formatter.format(vehicleOdometer).toInt(),
+                        formatter.format(vehiclePriceOtherCurrency).toDouble(),
                         mky.editableText.toString().toInt(),
                         mke.editableText.toString().toInt()
                     )
@@ -424,14 +452,15 @@ class AddVehicleFragment : Fragment() {
                         modelMake.editText!!.text.toString(),
                         chosenMonth,
                         manufacturingYear.editText!!.text.toString().toLong(),
-                        odometerRead.editText?.text.toString().toInt(),
-                        Integer.parseInt(price.editText?.text.toString()).toDouble(),
+                        formatter.format(vehicleOdometer).toInt(),
+                        formatter.format(vehiclePrice).toDouble(),
                         mky.editableText.toString().toInt(),
                         mke.editableText.toString().toInt(),
                     )
                 }
-                ContainerActivity.closest = bestOption()
-                ContainerActivity.bestPM = bestPossibleMatch
+
+                closest = bestOption()
+                bestPM = bestPossibleMatch
 
                 val alert = Alerter.create(requireActivity())
                 alert.setTitle(R.string.success)
@@ -487,30 +516,40 @@ class AddVehicleFragment : Fragment() {
 
         if (CHOSEN_CURRENCY == 2 || prefs!!.getInt("CHOSEN_CURRENCY", 0) == 2) {
             putSavedCurrency(
-                equivalencia.editText?.text.toString().toFloat(),
-                price_new.editText?.text.toString().toFloat()
+                vehiclePriceEquivalence.toFloat(),
+                vehiclePriceOtherCurrency.toFloat()
             )
         }
 
-        vin()
-        ContainerActivity.ucn_value = ucn(
-            odometerReading,
-            price,
+        val odometerReadEt = replaceSymbol(vehicleOdometer.toString())
+        val priceET = replaceSymbol(vehiclePrice.toString().trim { it <= ' ' })
+
+        if (llOtherCurrencies.isVisible) {
+            val newPriceET = replaceSymbol(vehiclePriceOtherCurrency.trim { it <= ' ' })
+            val equivalenceET = replaceSymbol(vehiclePriceEquivalence)
+            getVin(vehicleInMonths(), odometerReadEt, 0f, newPriceET, equivalenceET)
+        } else {
+            getVin(vehicleInMonths(), odometerReadEt, priceET, 0f, 0f)
+        }
+
+        ucn_value = ucn(
+            replaceSymboltoInt(odometerReading.toString()),
+            replaceSymbol(price.toString()).toDouble(),
             mkEnd.toFloat(),
             mkYearly.toFloat()
         )
         cocienteVehiculos(
-            ContainerActivity.vin_value, ucn(
-                odometerReading,
-                price,
+            vin_value.toFloat(), ucn(
+                replaceSymboltoInt(odometerReading.toString()),
+                replaceSymbol(price.toString()).toDouble(),
                 mkEnd.toFloat(),
                 mkYearly.toFloat()
             )
         )
         vuRelation(
-            ContainerActivity.vin_value, ucn(
-                odometerReading,
-                price,
+            vin_value.toFloat(), ucn(
+                replaceSymboltoInt(odometerReading.toString()),
+                replaceSymbol(price.toString()).toDouble(),
                 mkEnd.toFloat(),
                 mkYearly.toFloat()
             )
@@ -524,10 +563,13 @@ class AddVehicleFragment : Fragment() {
             price,
             mkYearly,
             mkEnd,
-            ucn(odometerReading, price, mkEnd.toFloat(), mkYearly.toFloat()),
-            ContainerActivity.vin_value,
-            ContainerActivity.cociente_temp,
-            ContainerActivity.vu_relation_value,
+            ucn(
+                replaceSymboltoInt(odometerReading.toString()),
+                replaceSymbol(price.toString()).toDouble(), mkEnd.toFloat(), mkYearly.toFloat()
+            ),
+            vin_value.toFloat(),
+            cociente_temp,
+            vu_relation_value,
             isKm(unitPicker.editText!!.text.toString())
         )
     }
@@ -544,9 +586,9 @@ class AddVehicleFragment : Fragment() {
         var savedValue = 0.0
         val editor = prefs!!.edit()
         if (prefs!!.getFloat("CURRENCY_EQ", 0f)
-                .toString() != equivalencia.editText?.text.toString()
+                .toString() != vehiclePriceEquivalence
         ) {
-            editor.putFloat("CURRENCY_EQ", equivalencia.editText?.text.toString().toFloat())
+            editor.putFloat("CURRENCY_EQ", replaceSymbol(vehiclePriceEquivalence))
             editor.apply()
             return currencyConverter(equivalenc, thisPrice.toLong())
         }
@@ -779,18 +821,20 @@ class AddVehicleFragment : Fragment() {
         return ((newDate.year * 12) + monthNumber(newDate.month.toString()))
     }
 
-    private fun vin() {
-        val value = if (!llOtherCurrencies.isVisible) {
-            (10.0.pow(13.0) / (vehicleInMonths() * odometerRead.editText!!.text.toString()
-                .toFloat() * price.editText!!.text.toString().toInt())).toFloat()
-        } else {
-            ((10.0.pow(13.0) * equivalencia.editText!!.text.toString()
-                .toFloat()) / (vehicleInMonths() * odometerRead.editText!!.text.toString()
-                .toFloat() *
-                    price_new.editText!!.text.toString().toFloat()))
-        }
-        ContainerActivity.vin_value = String.format("%.6f", value).toFloat()
-    }
+//    private fun vin() {
+//        val value = if (!llOtherCurrencies.isVisible) {
+//            (10.0.pow(13.0) / (vehicleInMonths() * odometer_et.text.toString().trim { it <= ' ' }
+//                .toFloat() * Integer.parseInt(
+//                price_et.text.toString().trim { it <= ' ' }))).toFloat()
+//        } else {
+//            ((10.0.pow(13.0) * equivalencia_et.text.toString().trim { it <= ' ' }
+//                .toFloat()) / (vehicleInMonths() * odometer_et.text.toString().trim { it <= ' ' }
+//                .toFloat() *
+//                    price_new.editText!!.text.toString().trim { it <= ' ' }.toFloat()))
+//        }
+//        vin_value = formatNumber(value.toString().toFloat())
+////        ContainerActivity.vin_value = String.format("%.5f", value).toDouble()
+//    }
 
     private fun ucn(odometerRead: Int, price: Double, mkEnd: Float, mkYearly: Float): Float {
 
@@ -807,13 +851,8 @@ class AddVehicleFragment : Fragment() {
         }
     }
 
-    private fun cocienteVehiculos(vin: Float, ucn: Float) {
-        val tmp = vin / ucn
-        ContainerActivity.cociente_temp = String.format("%.4f", tmp).toFloat()
-    }
-
     private fun vuRelation(vin_val: Float, ucn_val: Float) {
-        ContainerActivity.vu_relation_value = vin_val / ucn_val
+        vu_relation_value = vin_val / ucn_val
     }
 
     private fun bestOption(): Float {

@@ -42,7 +42,7 @@
     <string name="mk_end_tv">Estimated number of mi/km when you wouldn\'t like to drive this vehicle ANYMORE.  If not sure, leave the default value.</string>
     <string name="mk_year_tv">Enter the estimated number of mi/km you would drive this vehicle in ONE YEAR.  If not sure, leave the default value.</string>
     <string name="results">Results</string>
-    <string name="other_currencies">FOR OTHER CURRENCIES</string>
+    <string name="other_currencies">OTHER CURRENCIES</string>
     <string name="_1usd">1 US$ =</string>
     <string name="pesos_example">E.g. 2750 Pesos</string>
     <string name="_25000">20000</string>
@@ -51,7 +51,7 @@
     <string name="year_example">E.g. 2008</string>
     <string name="history">History</string>
     <string name="compare">Compare</string>
-    <string name="vehicle_list_title">The required vehicle and usage information that you have entered in this list, is the only data which will be processed to obtain the results shown on the next page.</string>
+    <string name="vehicle_list_title">Check all entries for errors. X-out the wrong one and re-do it. This is the only data that will be processed to obtain the results shown on the following page.</string>
     <string name="share">Share</string>
     <string name="rate_us">Rate us</string>
     <string name="support">Support</string>
@@ -114,7 +114,7 @@
     <string name="billing_not_ready">Billing client not ready</string>
     <string name="price_in_your_currency">Price in your currency</string>
     <string name="email_message">" "</string>
-    <string name="must_provide_a_year_between">"You must provide a year between 1920 and "</string>
+    <string name="must_provide_a_year_between">You must provide a year between 1920 and </string>
     <string name="_250000">250000</string>
     <string name="_20000">20000</string>
     <string name="your_best_option_label">Your Best Option!</string>
@@ -122,4 +122,9 @@
     <string name="pay_as_you_wish">Pay as you wish</string>
     <string name="_1_usd">$1 USD</string>
     <string name="remove_button">X</string>
+    <string name="_3_usd">$3 USD</string>
+    <string name="_5_usd">$5 USD</string>
+    <string name="_10_usd">$10 USD</string>
+    <string name="_15_usd">$15 USD</string>
+    <string name="_25_usd">$25 USD</string>
 </resources>

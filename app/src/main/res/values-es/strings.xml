@@ -39,8 +39,8 @@
     <string name="odometerReading">Ingrese la lectura actual en millas o kilómetros.</string>
     <string name="costs">Incluya en este campo los costos adicionales para extras o reparaciones necesarias.</string>
     <string name="costs_2">Incluya en el campo del precio los costos adicionales para extras o reparaciones necesarias.</string>
-    <string name="mk_end_tv">Inggrese el número estimado de km/mi cuando crea que NO manejará el vehículo nuevamente. Si no está seguro, use el valor predeterminado (250000).</string>
-    <string name="mk_year_tv">Ingrese el número estimado de km/mi que recorrerá en UN AÑO. Si no está seguro, use el valor predeterminado (20000).</string>
+    <string name="mk_end_tv">Ingrese el número estimado de mi/km cuando usted crea que NO deba manejar MAS este vehículo.\nSi no está seguro, use el valor indicado (250000).</string>
+    <string name="mk_year_tv">Ingrese el número estimado de mi/km que usted recorrería AL AÑO en este vehículo.\nSi no está seguro, use el valor indicado (20000).</string>
     <string name="results">Resultados</string>
     <string name="other_currencies">OTRAS MONEDAS</string>
     <string name="_1usd">1 US$ =</string>
@@ -51,7 +51,7 @@
     <string name="year_example">Ej. 2008</string>
     <string name="history">Historial</string>
     <string name="compare">Comparar</string>
-    <string name="vehicle_list_title">La información acerca de los vehículos y el uso asociado que ha ingresado en esta lista, son los únicos datos que van a ser procesados para obtener los resultados que se verán en la siguiente página.</string>
+    <string name="vehicle_list_title">Si hay error en algún vehículo, retírelo de la lista (tocar X) y reingréselo. Estos son los únicos datos que serán procesados para obtener los resultados que constan en la página final.</string>
     <string name="share">Compartir</string>
     <string name="rate_us">Califícanos</string>
     <string name="support">Soporte</string>
@@ -71,13 +71,13 @@
     <string name="km">km</string>
     <string name="best_choice_desc">Se basan en la combinación de precio, kilometraje y fecha de fábrica.</string>
     <string name="best_bet_desc">Se basan en las necesidades personales del comprador expresadas por los datos M/K</string>
-    <string name="best_choice_desc_bottom">"El vehículo con el <b>VIN</b> más alto es la "</string>
+    <string name="best_choice_desc_bottom">"El vehículo con el <b>VIN</b> más alto es su "</string>
     <string name="best_choice_text"><i><b>mejor-elección</b></i></string>
     <string name="best_bet_text"><i><b>mejor-selección.</b></i></string>
-    <string name="best_option_text"><i><b>¡ES LA MEJOR-OPCION!</b></i></string>
-    <string name="best_bet_desc_bottom">"El vehículo con el <b>UCN</b> más bajo es la "</string>
+    <string name="best_option_text"><i><b>¡ES SU MEJOR-OPCION!</b></i></string>
+    <string name="best_bet_desc_bottom">"El vehículo con el <b>UCN</b> más bajo es su "</string>
     <string name="vin_ucn_relations_desc">El vehículo con el valor más próximo al <b>BPR</b>:</string>
-    <string name="mileage_info">kilometraje</string>
+    <string name="mileage_info">Recorrido</string>
     <string name="make_model">Marca/Modelo</string>
     <string name="price_of_vehicle">Precio del vehículo</string>
     <string name="vin_ucn_relations_desc_2">"Es su "</string>
@@ -123,4 +123,9 @@
     <string name="pay_as_you_wish">¿Desea apoyarnos?</string>
     <string name="_1_usd">$1 USD</string>
     <string name="remove_button">X</string>
+    <string name="_3_usd">$3 USD</string>
+    <string name="_5_usd">$5 USD</string>
+    <string name="_10_usd">$10 USD</string>
+    <string name="_15_usd">$15 USD</string>
+    <string name="_25_usd">$25 USD</string>
 </resources>

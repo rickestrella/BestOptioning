@@ -39,11 +39,67 @@
                     android:textStyle="bold|italic" />
 
                 <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/optionsRv"
+                    android:id="@+id/billing_rv"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="5dp"
-                    tools:itemCount="3" />
+                    tools:itemCount="6" />
+
+                <!--                <GridLayout-->
+                <!--                    android:layout_width="wrap_content"-->
+                <!--                    android:layout_height="wrap_content"-->
+                <!--                    android:columnCount="3"-->
+                <!--                    android:rowCount="2"-->
+                <!--                    android:layout_gravity="center">-->
+
+                <!--                    <Button-->
+                <!--                        android:id="@+id/purchase1Button"-->
+                <!--                        android:layout_width="wrap_content"-->
+                <!--                        android:layout_height="wrap_content"-->
+                <!--                        android:layout_marginHorizontal="1dp"-->
+                <!--                        android:layout_gravity="center"-->
+                <!--                        android:text="@string/_1_usd" />-->
+
+                <!--                    <Button-->
+                <!--                        android:id="@+id/purchase3Button"-->
+                <!--                        android:layout_width="wrap_content"-->
+                <!--                        android:layout_height="wrap_content"-->
+                <!--                        android:layout_marginHorizontal="1dp"-->
+                <!--                        android:layout_gravity="center"-->
+                <!--                        android:text="@string/_3_usd" />-->
+
+                <!--                    <Button-->
+                <!--                        android:id="@+id/purchase5Button"-->
+                <!--                        android:layout_width="wrap_content"-->
+                <!--                        android:layout_height="wrap_content"-->
+                <!--                        android:layout_marginHorizontal="1dp"-->
+                <!--                        android:layout_gravity="center"-->
+                <!--                        android:text="@string/_5_usd" />-->
+
+                <!--                    <Button-->
+                <!--                        android:id="@+id/purchase10Button"-->
+                <!--                        android:layout_width="wrap_content"-->
+                <!--                        android:layout_height="wrap_content"-->
+                <!--                        android:layout_marginEnd="1dp"-->
+                <!--                        android:layout_gravity="center"-->
+                <!--                        android:text="@string/_10_usd" />-->
+
+                <!--                    <Button-->
+                <!--                        android:id="@+id/purchase15Button"-->
+                <!--                        android:layout_width="wrap_content"-->
+                <!--                        android:layout_height="wrap_content"-->
+                <!--                        android:layout_marginHorizontal="1dp"-->
+                <!--                        android:layout_gravity="center"-->
+                <!--                        android:text="@string/_15_usd" />-->
+
+                <!--                    <Button-->
+                <!--                        android:id="@+id/purchase25Button"-->
+                <!--                        android:layout_width="wrap_content"-->
+                <!--                        android:layout_height="wrap_content"-->
+                <!--                        android:layout_marginStart="1dp"-->
+                <!--                        android:layout_gravity="center"-->
+                <!--                        android:text="@string/_25_usd" />-->
+
+                <!--                </GridLayout>-->
 
             </LinearLayout>
         </androidx.cardview.widget.CardView>

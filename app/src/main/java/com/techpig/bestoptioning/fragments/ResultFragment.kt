@@ -12,12 +12,11 @@ import android.widget.Button
 import android.widget.FrameLayout
 import android.widget.TextView
 import android.widget.Toast
-import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.android.billingclient.api.*
 import com.techpig.bestoptioning.R
 import com.techpig.bestoptioning.activities.HomeActivity
+import com.techpig.bestoptioning.activities.PurchaseOptionsActivity
 import com.techpig.bestoptioning.adapters.BestBetAdapter
 import com.techpig.bestoptioning.adapters.BestChoiceAdapter
 import com.techpig.bestoptioning.adapters.BestOptionAdapter
@@ -25,11 +24,10 @@ import com.techpig.bestoptioning.models.Vehicle
 import nl.dionsegijn.konfetti.KonfettiView
 import nl.dionsegijn.konfetti.models.Shape
 import nl.dionsegijn.konfetti.models.Size
-import java.text.DecimalFormat
 import java.util.*
 import kotlin.math.abs
 
-class ResultFragment : Fragment() {
+class ResultFragment : BaseFragment() {
 
     companion object {
         var boBpr: String = ""
@@ -50,12 +48,14 @@ class ResultFragment : Fragment() {
     lateinit var bestOptionRv: RecyclerView
 
 
+    lateinit var v: View
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        val v = inflater.inflate(R.layout.fragment_result, container, false)
+        v = inflater.inflate(R.layout.fragment_result, container, false)
 
         result_layout = v.findViewById(R.id.result_layout)
         bpmScore = v.findViewById(R.id.bpmScore)
@@ -66,7 +66,6 @@ class ResultFragment : Fragment() {
         bestOptionRv = v.findViewById(R.id.bestOptionRv)
 
         ////////////////////////////////// Billing /////////////////////////////////////////////////
-
 
 
         ////////////////////////////////////////////////////////////////////////////////////////////
@@ -89,17 +88,16 @@ class ResultFragment : Fragment() {
             val i = Intent(context, HomeActivity::class.java)
             startActivity(i)
             Toast.makeText(
-                activity?.applicationContext,
+                requireActivity(),
                 "Thanks for using our app!",
                 Toast.LENGTH_LONG
             ).show()
         }
 
-        //TODO: Permitir editar el vehiculo ingresado, agregar undo cuando se borra un vehiculo, ver vehiculo (contextMenu).
-
 
         donateButton.setOnClickListener {
-            billingDialog()
+//            billingDialog()
+            startActivity(Intent(requireActivity(), PurchaseOptionsActivity::class.java))
         }
 
         popDialog()
@@ -107,35 +105,9 @@ class ResultFragment : Fragment() {
         return v
     }
 
-    private fun billingDialog() {
-        val builder = AlertDialog.Builder(requireContext())
-        val alertLayout = layoutInflater.inflate(R.layout.billing_dialog, null)
-        builder.setView(alertLayout)
-        val dialog = builder.create()
-        dialog.show()
-        val cancelButton = dialog.findViewById<Button>(R.id.cancelPayment)
-        val purchaseOptionsRv = dialog.findViewById<RecyclerView>(R.id.optionsRv)
-
-        purchaseOptionsRv.layoutManager = LinearLayoutManager(requireActivity().applicationContext)
-
-
-        cancelButton.setOnClickListener {
-            dialog.dismiss()
-        }
-
-        dialog.setCancelable(false)
-        dialog.window?.setBackgroundDrawableResource(android.R.color.transparent)
-
-    }
-
     private fun popDialog() {
         val builder = AlertDialog.Builder(requireContext())
         val alertLayout: View = layoutInflater.inflate(R.layout.dialog_layout, null)
-
-        fun formatNumber(number: Float): Float {
-            val df = DecimalFormat("####.####")
-            return df.format(number.toDouble()).toFloat()
-        }
 
         builder.setView(alertLayout)
         val dialog = builder.create()
@@ -157,7 +129,13 @@ class ResultFragment : Fragment() {
         dialogMM.text = boTitle
 
         val dialogVS = alertLayout.findViewById<TextView>(R.id.dialog_vehicle_score)
-        val dialog_vehicle_score = formatNumber(boScore.toFloat())
+        val dialog_vehicle_score = if (Locale.getDefault().displayLanguage == Locale.getDefault()
+                .getDisplayLanguage(Locale.forLanguageTag("es"))
+        ) {
+            String.format("%.4f", replaceSymbol(boScore))
+        } else {
+            formatNumber(boScore.toFloat())
+        }
         dialogVS.text = dialog_vehicle_score.toString()
 
         val dialogButton = alertLayout.findViewById<Button>(R.id.dismiss_dialog_button)

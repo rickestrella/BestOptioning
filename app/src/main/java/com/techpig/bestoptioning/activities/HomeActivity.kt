@@ -32,7 +32,7 @@ class HomeActivity : AppCompatActivity() {
         ) {
             @Suppress("DEPRECATION")
             main_descriprion.text =
-                Html.fromHtml("Es una forma de ayudar a las personas que están<br>buscando un vehículo para comprar.<br>Una vez ingresada la información individual<br>de dos o más VEHICULOS similares<br>y su USO asociado,<br>la aplicación generará indicadores numéricos<br>para cada vehículo y que, al comparar esos valores,<br>se refleje cual sería su <b><i>mejor-elección,</b><br><b><i>mejor-selección</b> y <b><i>¡MEJOR OPCION!</b><br> <p style='text-align: center'><u>¡Es muy fácil y funciona!</p>")
+                Html.fromHtml("Es una forma de ayudar a las personas que están<br>buscando un vehículo a decidir<br>cual es aquel que se debe comprar.<br>Una vez ingresada la información individual de dos o más VEHICULOS similares y su USO asociado,<br>la aplicación generará indicadores numéricos<br>para cada vehículo y que, al comparar esos valores,<br>se refleje cual sería su <b><i>mejor-elección,</b><br><b><i>mejor-selección</b> y <b><i>¡MEJOR OPCION!</b><br> <p style='text-align: center'><u>¡Es muy fácil y funciona!</p>")
         } else {
             @Suppress("DEPRECATION")
             main_descriprion.text =

@@ -10,6 +10,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.techpig.bestoptioning.R
+import com.techpig.bestoptioning.fragments.BaseFragment
 import com.techpig.bestoptioning.models.Vehicle
 import com.techpig.bestoptioning.models.VehicleObject
 import kotlinx.android.synthetic.main.card_item_layout.view.*
@@ -50,8 +51,16 @@ class BestOptionAdapter(val context: Context, private val items: ArrayList<Vehic
         holder.cardTitle.isSelected = true
         holder.cardTitle.setSingleLine()
         holder.cardTitle.ellipsize = TextUtils.TruncateAt.MARQUEE
-        val cardScoreFourDigits = formatNumber(item.getVu_relation())
-        holder.cardScore.text = "$cardScoreFourDigits"
+        val cardScoreFourDigits = if (Locale.getDefault().displayLanguage == Locale.getDefault()
+                .getDisplayLanguage(
+                    Locale.forLanguageTag("es")
+                )
+        ) {
+            String.format("%.4f", BaseFragment().replaceSymbol(item.getVu_relation().toString()))
+        } else {
+            formatNumber(item.getVu_relation()).toString()
+        }
+        holder.cardScore.text = cardScoreFourDigits
 
 
         // Best Choice = highest VIN

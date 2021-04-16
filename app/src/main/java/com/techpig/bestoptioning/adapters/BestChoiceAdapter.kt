@@ -10,9 +10,11 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.techpig.bestoptioning.R
+import com.techpig.bestoptioning.fragments.BaseFragment
 import com.techpig.bestoptioning.models.VehicleObject
 import kotlinx.android.synthetic.main.card_item_layout.view.*
 import java.text.DecimalFormat
+import java.util.*
 
 class BestChoiceAdapter(val context: Context, val items: ArrayList<VehicleObject>) :
     RecyclerView.Adapter<BestChoiceAdapter.ViewHolder>() {
@@ -51,7 +53,15 @@ class BestChoiceAdapter(val context: Context, val items: ArrayList<VehicleObject
         holder.cardTitle.isSelected = true
         holder.cardTitle.setSingleLine()
         holder.cardTitle.ellipsize = TextUtils.TruncateAt.MARQUEE
-        val cardScoreFourDigits = formatNumber(item.getVin()).toString()
+        val cardScoreFourDigits = if (Locale.getDefault().displayLanguage == Locale.getDefault()
+                .getDisplayLanguage(
+                    Locale.forLanguageTag("es")
+                )
+        ) {
+            String.format("%.4f", BaseFragment().replaceSymbol(item.getVin().toString()))
+        } else {
+            formatNumber(item.getVin()).toString()
+        }
         holder.cardScore.text = cardScoreFourDigits
 
         fun highestVin() {
@@ -95,7 +105,7 @@ class BestChoiceAdapter(val context: Context, val items: ArrayList<VehicleObject
                 holder.containerCard.cardElevation = 12f
             } else {
                 holder.containerCard.setCardBackgroundColor(Color.parseColor("#FFEEB6"))
-                holder.containerCard.setPadding(8,8,8,8)
+                holder.containerCard.setPadding(8, 8, 8, 8)
                 holder.cardTitle.setTextColor(Color.parseColor("#000000"))
                 holder.cardScore.setTextColor(Color.parseColor("#000000"))
                 holder.cardScore.typeface = Typeface.defaultFromStyle(Typeface.NORMAL)
