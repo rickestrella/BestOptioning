@@ -48,6 +48,7 @@ class HomeActivity : AppCompatActivity() {
         addVehicleMainButton.setOnClickListener {
             val i = Intent(this@HomeActivity, ContainerActivity::class.java)
             startActivity(i)
+            finish()
         }
 
         when (applicationContext.resources.configuration.uiMode.and(Configuration.UI_MODE_NIGHT_MASK)) {

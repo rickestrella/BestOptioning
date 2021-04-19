@@ -87,14 +87,14 @@ class PurchaseActivity : AppCompatActivity() {
         skuDetails?.let {
             this.skuDetails = it
             txt_product_name?.text = skuDetails.title
-            txt_product_description?.text = skuDetails.description
+//            txt_product_description?.text = skuDetails.description
             showUIElements()
         }
     }
 
     private fun showUIElements() {
         txt_product_name?.visibility = View.VISIBLE
-        txt_product_description?.visibility = View.VISIBLE
+//        txt_product_description?.visibility = View.VISIBLE
         txt_product_buy?.visibility = View.VISIBLE
     }
 

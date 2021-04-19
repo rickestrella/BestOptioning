@@ -865,12 +865,12 @@ class AddVehicleFragment : BaseFragment() {
 
     private fun vin() {
         val odometerReadEt = replaceSymbol(odometer_et.text.toString())
-        val value = if (Locale.getDefault().displayLanguage == Locale.getDefault()
+        vin_value = if (Locale.getDefault().displayLanguage == Locale.getDefault()
                 .getDisplayLanguage(Locale.forLanguageTag("es"))
         ) {
             if (!llOtherCurrencies.isVisible) {
                 val priceET = replaceSymbol(price_et.text.toString().trim { it <= ' ' })
-                (10.0.pow(13.0) / (vehicleInMonths() * odometerReadEt * priceET)).toFloat()
+                ((10.0.pow(13.0) / (vehicleInMonths() * odometerReadEt * priceET)).toFloat()).toDouble()
             } else {
                 val newPriceET = replaceSymbol(priceNewEt.text.toString().trim { it <= ' ' })
                 val equivalenceET = replaceSymbol(equivalencia_et.text.toString())
@@ -878,15 +878,14 @@ class AddVehicleFragment : BaseFragment() {
             }
         } else {
             if (!llOtherCurrencies.isVisible) {
-                (10.0.pow(13.0) / (vehicleInMonths() * odometer_et.text.toString()
-                    .toFloat() * price_et.text.toString().toInt())).toFloat()
+                ((10.0.pow(13.0) / (vehicleInMonths() * odometer_et.text.toString()
+                    .toFloat() * price_et.text.toString().toInt())).toFloat()).toDouble()
             } else {
                 ((10.0.pow(13.0) * equivalencia_et.text.toString()
                     .toFloat()) / (vehicleInMonths() * odometer_et.text.toString()
                     .toFloat() * priceNewEt.text.toString().toFloat()))
             }
         }
-        vin_value = String.format("%.6f", value).toDouble()
     }
 
     private fun ucn(odometerRead: Int, price: Double, mkEnd: Float, mkYearly: Float): Float {

@@ -13,9 +13,11 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.BestOptioning">
         <activity android:name=".activities.PurchaseActivity" />
+
         <meta-data
             android:name="com.google.android.gms.wallet.api.enabled"
             android:value="true" />
+
         <activity android:name=".activities.HomeActivity" />
         <activity
             android:name=".activities.ContainerActivity"
