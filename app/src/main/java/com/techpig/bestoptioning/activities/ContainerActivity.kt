@@ -126,7 +126,7 @@ class ContainerActivity : BaseActivity() {
 
     override fun onBackPressed() {
         if (backPressedTime + 2000 > System.currentTimeMillis()) {
-            finishAffinity()
+            finish()
             exitProcess(0)
         } else {
             Toast.makeText(

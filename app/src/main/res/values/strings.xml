@@ -127,4 +127,5 @@
     <string name="_10_usd">$10 USD</string>
     <string name="_15_usd">$15 USD</string>
     <string name="_25_usd">$25 USD</string>
+    <string name="load_options">Load options</string>
 </resources>

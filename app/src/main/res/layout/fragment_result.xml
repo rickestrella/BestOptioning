@@ -67,7 +67,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/best_choice_text"
-                            android:textSize="18sp" />
+                            android:textSize="16sp" />
                     </LinearLayout>
                 </LinearLayout>
 
@@ -112,7 +112,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/best_bet_text"
-                            android:textSize="18sp" />
+                            android:textSize="16sp" />
                     </LinearLayout>
 
                 </LinearLayout>
@@ -139,18 +139,16 @@
                         android:orientation="horizontal">
 
                         <TextView
-                            android:layout_width="0dp"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_weight="3"
                             android:text="@string/best_possible_match_between_both_indicators"
                             tools:ignore="NestedWeights" />
 
                         <TextView
                             android:id="@+id/bpmScore"
                             style="@style/TextAppearance.AppCompat.Light.SearchResult.Title"
-                            android:layout_width="0dp"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_weight="1.5"
                             android:text="@string/bpm_example"
                             android:textSize="16sp"
                             android:textStyle="bold" />

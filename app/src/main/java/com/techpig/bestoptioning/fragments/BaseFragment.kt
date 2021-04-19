@@ -35,32 +35,6 @@ open class BaseFragment : Fragment() {
         return df.format(number.toDouble()).toFloat()
     }
 
-//    fun getVin(
-//        mileAge: Long,
-//        odometerRead: Float,
-//        price: Float?,
-//        newPrice: Float?,
-//        equivalence: Float?
-//    ) {
-//        val value = if (!llOtherCurrencies.isVisible) {
-//            (10.0.pow(13.0) / (mileAge * odometerRead) * price!!)
-//        } else {
-//            ((10.0.pow(13.0) * equivalence!!) / (mileAge * odometerRead) * newPrice!!)
-//        }
-//
-//        vin_value =
-//            if (Locale.getDefault().displayLanguage == Locale.getDefault().getDisplayLanguage(
-//                    Locale.forLanguageTag
-//                        ("es")
-//                )
-//            ) {
-//                formatNumber(replaceSymbol(value.toString())).toDouble()
-//            } else {
-//                formatNumber(value.toFloat()).toDouble()
-//            }
-//        Log.e("VIN", "$vin_value")
-//    }
-
     fun cocienteVehiculos(vin: Float, ucn: Float) {
         val tmp = replaceSymbol(vin.toString()) / replaceSymbol(ucn.toString())
 

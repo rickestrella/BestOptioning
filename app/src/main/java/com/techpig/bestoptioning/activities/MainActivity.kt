@@ -60,6 +60,7 @@ class MainActivity : BaseActivity() {
         Handler().postDelayed({
             val intent = Intent(this@MainActivity, HomeActivity::class.java)
             startActivity(intent)
+            finish()
         }, 5000)
     }
 }

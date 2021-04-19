@@ -16,7 +16,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.techpig.bestoptioning.R
 import com.techpig.bestoptioning.activities.HomeActivity
-import com.techpig.bestoptioning.activities.PurchaseOptionsActivity
+import com.techpig.bestoptioning.activities.PurchaseActivity
 import com.techpig.bestoptioning.adapters.BestBetAdapter
 import com.techpig.bestoptioning.adapters.BestChoiceAdapter
 import com.techpig.bestoptioning.adapters.BestOptionAdapter
@@ -92,7 +92,7 @@ class ResultFragment : BaseFragment() {
 
         donateButton.setOnClickListener {
 //            billingDialog()
-            startActivity(Intent(requireActivity(), PurchaseOptionsActivity::class.java))
+            startActivity(Intent(requireActivity(), PurchaseActivity::class.java))
         }
 
         popDialog()

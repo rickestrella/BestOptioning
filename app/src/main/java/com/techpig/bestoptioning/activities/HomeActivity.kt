@@ -8,13 +8,18 @@ import android.text.Html
 import android.view.WindowManager
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.button.MaterialButton
 import com.techpig.bestoptioning.R
 import kotlinx.android.synthetic.main.activity_home.*
 import java.util.*
+import kotlin.system.exitProcess
 
 class HomeActivity : AppCompatActivity() {
+
+    var backPressedTime = 0L
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
@@ -81,5 +86,20 @@ class HomeActivity : AppCompatActivity() {
                 main_descriprion.setTextColor(Color.parseColor("#000000"))
             }
         }
+    }
+
+    override fun onBackPressed() {
+        if (backPressedTime + 2000 > System.currentTimeMillis()) {
+            finish()
+            exitProcess(0)
+        } else {
+            Toast.makeText(
+                applicationContext,
+                "Press back again to exit the app",
+                Toast.LENGTH_SHORT
+            )
+                .show()
+        }
+        backPressedTime = System.currentTimeMillis()
     }
 }
