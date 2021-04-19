@@ -6,6 +6,7 @@ import android.content.res.Configuration
 import android.graphics.Color
 import android.os.Bundle
 import android.text.SpannableStringBuilder
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -24,14 +25,15 @@ import com.techpig.bestoptioning.R
 import com.techpig.bestoptioning.activities.ContainerActivity.Companion.chipNavBar
 import com.techpig.bestoptioning.activities.ContainerActivity.Companion.frame_layout
 import com.techpig.bestoptioning.models.Vehicle
+import kotlinx.android.synthetic.main.fragment_add_vehicle.*
 import java.time.LocalDate
 import java.util.*
+import kotlin.math.pow
 
 class AddVehicleFragment : BaseFragment() {
 
     private val calendar = Calendar.getInstance()
     private val currentYear = calendar[Calendar.YEAR]
-    private val currentMonth = calendar[Calendar.MONTH]
 
     private var chosenMonth: Long = 0
     private var bestPossibleMatch = 0f
@@ -534,16 +536,14 @@ class AddVehicleFragment : BaseFragment() {
             )
         }
 
-        val odometerReadEt = replaceSymbol(vehicleOdometer.toString())
-        val priceET = replaceSymbol(vehiclePrice.toString().trim { it <= ' ' })
+//        if (llOtherCurrencies.isVisible) {
 
-        if (llOtherCurrencies.isVisible) {
-            val newPriceET = replaceSymbol(vehiclePriceOtherCurrency.trim { it <= ' ' })
-            val equivalenceET = replaceSymbol(vehiclePriceEquivalence)
-            getVin(vehicleInMonths(), odometerReadEt, 0f, newPriceET, equivalenceET)
-        } else {
-            getVin(vehicleInMonths(), odometerReadEt, priceET, 0f, 0f)
-        }
+//            getVin(vehicleInMonths(), odometerReadEt, 0f, newPriceET, equivalenceET)
+//        } else {
+//            getVin(vehicleInMonths(), odometerReadEt, priceET, 0f, 0f)
+//        }
+
+        vin()
 
         ucn_value = ucn(
             replaceSymboltoInt(odometerReading.toString()),
@@ -861,6 +861,33 @@ class AddVehicleFragment : BaseFragment() {
         }
         return ((deviceYear * 12) + monthNumber(deviceMonth.toString())) -
                 ((pickedYear * 12) + monthNumber(pickedMonth))
+    }
+
+    private fun vin() {
+        val odometerReadEt = replaceSymbol(odometer_et.text.toString())
+        val value = if (Locale.getDefault().displayLanguage == Locale.getDefault()
+                .getDisplayLanguage(Locale.forLanguageTag("es"))
+        ) {
+            if (!llOtherCurrencies.isVisible) {
+                val priceET = replaceSymbol(price_et.text.toString().trim { it <= ' ' })
+                (10.0.pow(13.0) / (vehicleInMonths() * odometerReadEt * priceET)).toFloat()
+            } else {
+                val newPriceET = replaceSymbol(priceNewEt.text.toString().trim { it <= ' ' })
+                val equivalenceET = replaceSymbol(equivalencia_et.text.toString())
+                ((10.0.pow(13.0) * equivalenceET) / (vehicleInMonths() * odometerReadEt * newPriceET))
+            }
+        } else {
+            if (!llOtherCurrencies.isVisible) {
+                (10.0.pow(13.0) / (vehicleInMonths() * odometer_et.text.toString()
+                    .toFloat() * price_et.text.toString().toInt())).toFloat()
+            } else {
+                ((10.0.pow(13.0) * equivalencia_et.text.toString()
+                    .toFloat()) / (vehicleInMonths() * odometer_et.text.toString()
+                    .toFloat() * priceNewEt.text.toString().toFloat()))
+            }
+        }
+        vin_value = String.format("%.6f", value).toDouble()
+        Log.e("VIN", vin_value.toString())
     }
 
     private fun ucn(odometerRead: Int, price: Double, mkEnd: Float, mkYearly: Float): Float {
