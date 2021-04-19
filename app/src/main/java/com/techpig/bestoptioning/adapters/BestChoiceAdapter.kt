@@ -19,6 +19,8 @@ import java.util.*
 class BestChoiceAdapter(val context: Context, val items: ArrayList<VehicleObject>) :
     RecyclerView.Adapter<BestChoiceAdapter.ViewHolder>() {
 
+    // VIN
+
     var highestV = 0f
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -58,10 +60,11 @@ class BestChoiceAdapter(val context: Context, val items: ArrayList<VehicleObject
                     Locale.forLanguageTag("es")
                 )
         ) {
-            String.format("%.4f", BaseFragment().replaceSymbol(item.getVin().toString()))
+            formatNumber(BaseFragment().replaceSymbol(item.getVin().toString())).toString()
         } else {
             formatNumber(item.getVin()).toString()
         }
+
         holder.cardScore.text = cardScoreFourDigits
 
         fun highestVin() {

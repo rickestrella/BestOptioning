@@ -65,11 +65,6 @@ class ResultFragment : BaseFragment() {
         bestBetRv = v.findViewById(R.id.bestBetRv)
         bestOptionRv = v.findViewById(R.id.bestOptionRv)
 
-        ////////////////////////////////// Billing /////////////////////////////////////////////////
-
-
-        ////////////////////////////////////////////////////////////////////////////////////////////
-
         when (context?.resources!!.configuration.uiMode.and(Configuration.UI_MODE_NIGHT_MASK)) {
             Configuration.UI_MODE_NIGHT_YES -> result_layout.setBackgroundColor(Color.parseColor("#141414"))
             Configuration.UI_MODE_NIGHT_NO -> result_layout.setBackgroundColor(Color.WHITE)

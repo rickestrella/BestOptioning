@@ -50,7 +50,7 @@
                         android:id="@+id/bestChoiceRv"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginVertical="5dp" />
+                        android:layout_marginVertical="3dp" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -95,7 +95,7 @@
                         android:id="@+id/bestBetRv"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginVertical="5dp" />
+                        android:layout_marginVertical="3dp" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -176,7 +176,7 @@
                         android:id="@+id/bestOptionRv"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginVertical="5dp" />
+                        android:layout_marginVertical="3dp" />
 
                     <LinearLayout
                         android:layout_width="match_parent"

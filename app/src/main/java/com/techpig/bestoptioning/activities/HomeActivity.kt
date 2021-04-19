@@ -32,13 +32,13 @@ class HomeActivity : AppCompatActivity() {
         ) {
             @Suppress("DEPRECATION")
             main_descriprion.text =
-                Html.fromHtml("Es una forma de ayudar a las personas que están<br>buscando un vehículo a decidir<br>cual es aquel que se debe comprar.<br>Una vez ingresada la información individual de dos o más VEHICULOS similares y su USO asociado,<br>la aplicación generará indicadores numéricos<br>para cada vehículo y que, al comparar esos valores,<br>se refleje cual sería su <b><i>mejor-elección,</b><br><b><i>mejor-selección</b> y <b><i>¡MEJOR OPCION!</b><br> <p style='text-align: center'><u>¡Es muy fácil y funciona!</p>")
+                Html.fromHtml("Es una forma genial de ayudar a las personas<br>que están buscando un vehículo a decidir<br>cual es aquel que se debe comprar.<br>Una vez ingresados los datos de 2 o más<br>VEHICULOS comparables y su USO asociado,<br>la aplicación generará indicadores numéricos<br>para cada vehículo y que, al comparar esos valores,<br>se refleje cual sería su <b><i>mejor-elección,</b><br><b><i>mejor-selección</b> y <b><i>¡MEJOR OPCION!</b><br> <p style='text-align: center'><u>¡Es muy fácil y funciona!</p>")
         } else {
             @Suppress("DEPRECATION")
             main_descriprion.text =
                 Html.fromHtml("It's a way to help car buyers decide<br>which car to buy.<br>After some VEHICLE and USAGE<br>information of 2 or more comparable<br>vehicles has been entered,<br>this app will generate<br>numerical indicators for each car<br>to compare those values and reflect<br>which one could be your <b><i>best-choice,</b><br><b><i>best-bet</b> and <b><i>BEST-OPTION!</b><br> <p style='text-align: center'><u>It's easier and it works!</p>")
         }
-        ///////////////////
+
 
         addVehicleMainButton.setOnClickListener {
             val i = Intent(this@HomeActivity, ContainerActivity::class.java)

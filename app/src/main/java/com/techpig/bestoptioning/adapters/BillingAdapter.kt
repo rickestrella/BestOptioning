@@ -4,10 +4,10 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import androidx.recyclerview.widget.RecyclerView
 import com.techpig.bestoptioning.R
 import com.techpig.bestoptioning.models.DonateOptionModel
-import kotlinx.android.synthetic.main.purchase_button_layout.view.*
 
 class BillingAdapter(
     var context: Context,
@@ -15,7 +15,9 @@ class BillingAdapter(
 ) :
     RecyclerView.Adapter<BillingAdapter.ViewHolder>() {
 
-    class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
+    class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        val button = itemView.findViewById<Button>(R.id.purchaseButton)!!
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(
@@ -24,10 +26,9 @@ class BillingAdapter(
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val items = listOfItems[position]
-        for (i in listOfItems) {
-            holder.itemView.purchaseButton.text = items.getTitle()
-        }
+        val buttons = listOfItems[position]
+
+        holder.button.text = buttons.getTitle()
     }
 
     override fun getItemCount(): Int {

@@ -74,14 +74,14 @@
     <string name="best_choice_desc_bottom">"El vehículo con el <b>VIN</b> más alto es su "</string>
     <string name="best_choice_text"><i><b>mejor-elección</b></i></string>
     <string name="best_bet_text"><i><b>mejor-selección.</b></i></string>
-    <string name="best_option_text"><i><b>¡ES SU MEJOR-OPCION!</b></i></string>
+    <string name="best_option_text"><i><b>ES ¡SU MEJOR-OPCION!</b></i></string>
     <string name="best_bet_desc_bottom">"El vehículo con el <b>UCN</b> más bajo es su "</string>
     <string name="vin_ucn_relations_desc">El vehículo con el valor más próximo al <b>BPR</b>:</string>
     <string name="mileage_info">Recorrido</string>
     <string name="make_model">Marca/Modelo</string>
     <string name="price_of_vehicle">Precio del vehículo</string>
     <string name="vin_ucn_relations_desc_2">"Es su "</string>
-    <string name="good_to_go">¡Enhorabuena!</string>
+    <string name="good_to_go">¡LISTO!</string>
     <string name="bo">Mejor Opción:</string>
     <string name="vehicle_score">"Puntuación del vehículo: "</string>
     <string name="success">¡Listo!</string>

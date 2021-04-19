@@ -43,29 +43,37 @@ open class BaseFragment : Fragment() {
         equivalence: Float?
     ) {
         val value = if (!llOtherCurrencies.isVisible) {
-            (10.0.pow(13.0) / (mileAge * replaceSymbol(odometerRead.toString()) * replaceSymbol(
-                price!!.toString()
-            )))
+            (10.0.pow(13.0) / (mileAge * odometerRead) * price!!)
         } else {
-            ((10.0.pow(13.0) * replaceSymbol(equivalence!!.toString())) / (mileAge * replaceSymbol(
-                odometerRead.toString()
-            ) * replaceSymbol(newPrice!!.toString())))
+            ((10.0.pow(13.0) * equivalence!!) / (mileAge * odometerRead) * newPrice!!)
         }
 
-        try {
-            vin_value = replaceSymbol(value.toString()).toDouble()
-        } catch (e: NumberFormatException) {
-            Log.e("VIN Exception", e.localizedMessage!!)
-        }
+        vin_value =
+            if (Locale.getDefault().displayLanguage == Locale.getDefault().getDisplayLanguage(
+                    Locale.forLanguageTag
+                        ("es")
+                )
+            ) {
+                formatNumber(replaceSymbol(value.toString())).toDouble()
+            } else {
+                formatNumber(value.toFloat()).toDouble()
+            }
+        Log.e("VIN", "$vin_value")
     }
 
     fun cocienteVehiculos(vin: Float, ucn: Float) {
         val tmp = replaceSymbol(vin.toString()) / replaceSymbol(ucn.toString())
-        try {
-            cociente_temp = tmp
-        } catch (e: NumberFormatException) {
-            Log.e("COCIENTE EXCEPTION", e.localizedMessage!!)
-        }
+
+        cociente_temp =
+            if (Locale.getDefault().displayLanguage == Locale.getDefault().getDisplayLanguage(
+                    Locale.forLanguageTag
+                        ("es")
+                )
+            ) {
+                replaceSymbol(tmp.toString())
+            } else {
+                tmp
+            }
     }
 
     fun replaceSymbol(value: String): Float {
@@ -74,6 +82,10 @@ open class BaseFragment : Fragment() {
 
     fun replaceSymboltoInt(value: String): Int {
         return value.replace(",", ".").toInt()
+    }
+
+    fun replaceSymboltoDouble(value: String): Double {
+        return value.replace(",", ".").toDouble()
     }
 
 }
