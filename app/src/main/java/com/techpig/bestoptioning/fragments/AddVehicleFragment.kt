@@ -887,7 +887,6 @@ class AddVehicleFragment : BaseFragment() {
             }
         }
         vin_value = String.format("%.6f", value).toDouble()
-        Log.e("VIN", vin_value.toString())
     }
 
     private fun ucn(odometerRead: Int, price: Double, mkEnd: Float, mkYearly: Float): Float {
