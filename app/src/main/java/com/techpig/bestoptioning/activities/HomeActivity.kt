@@ -29,7 +29,8 @@ class HomeActivity : AppCompatActivity() {
         val main_descriprion = findViewById<TextView>(R.id.main_descriprion)
         val addVehicleMainButton = findViewById<MaterialButton>(R.id.addVehicleMainButton)
 
-        window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
+        //Keep screen ON
+//        window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
 
         //Detect system language
         if (Locale.getDefault().displayLanguage == Locale.getDefault()
@@ -37,7 +38,7 @@ class HomeActivity : AppCompatActivity() {
         ) {
             @Suppress("DEPRECATION")
             main_descriprion.text =
-                Html.fromHtml("Es una forma genial de ayudar a las personas<br>que están buscando un vehículo a decidir<br>cual es aquel que se debe comprar.<br>Una vez ingresados los datos de 2 o más<br>VEHICULOS comparables y su USO asociado,<br>la aplicación generará indicadores numéricos<br>para cada vehículo y que, al comparar esos valores,<br>se refleje cual sería su <b><i>mejor-elección,</b><br><b><i>mejor-selección</b> y <b><i>¡MEJOR OPCION!</b><br> <p style='text-align: center'><u>¡Es muy fácil y funciona!</p>")
+                Html.fromHtml("Es una forma muy útil de ayudar a las personas<br>que están buscando un vehículo a decidir<br>cual es aquel que se debe comprar.<br>Una vez ingresados los datos de 2 o más<br>VEHICULOS comparables y su USO asociado,<br>la aplicación generará indicadores numéricos<br>propios de cada vehículo<br>para que al comparar esos valores,<br>se refleje cual sería su <b><i>mejor-elección,</b><br><b><i>mejor-selección</b> y <b><i>¡MEJOR OPCION!</b><br> <p style='text-align: center'><u>¡Es muy fácil y funciona!</p>")
         } else {
             @Suppress("DEPRECATION")
             main_descriprion.text =
@@ -93,14 +94,14 @@ class HomeActivity : AppCompatActivity() {
         if (backPressedTime + 2000 > System.currentTimeMillis()) {
             finish()
             exitProcess(0)
-        } else {
-            Toast.makeText(
-                applicationContext,
-                "Press back again to exit the app",
-                Toast.LENGTH_SHORT
-            )
-                .show()
         }
+        Toast.makeText(
+            applicationContext,
+            "Press back again to exit the app",
+            Toast.LENGTH_SHORT
+        )
+            .show()
+
         backPressedTime = System.currentTimeMillis()
     }
 }

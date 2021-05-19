@@ -28,7 +28,7 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="20dp"
+                    android:layout_marginBottom="10dp"
                     android:orientation="vertical">
 
                     <TextView
@@ -50,7 +50,8 @@
                         android:id="@+id/bestChoiceRv"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginVertical="3dp" />
+                        tools:itemCount="1"
+                        tools:listitem="@layout/card_item_layout" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -58,9 +59,12 @@
                         android:orientation="horizontal">
 
                         <TextView
+                            android:id="@+id/viindicatorTv"
+                            style="@style/TextAppearance.AppCompat.Light.SearchResult.Subtitle"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="@string/best_choice_desc_bottom" />
+                            android:text="@string/best_choice_desc_bottom"
+                            android:textSize="15sp" />
 
                         <TextView
                             style="@style/TextAppearance.AppCompat.Light.SearchResult.Subtitle"
@@ -95,7 +99,9 @@
                         android:id="@+id/bestBetRv"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginVertical="3dp" />
+                        android:textColor="@color/black"
+                        tools:itemCount="1"
+                        tools:listitem="@layout/card_item_layout" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -103,9 +109,11 @@
                         android:orientation="horizontal">
 
                         <TextView
+                            style="@style/TextAppearance.AppCompat.Light.SearchResult.Subtitle"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="@string/best_bet_desc_bottom" />
+                            android:text="@string/best_bet_desc_bottom"
+                            android:textSize="15sp" />
 
                         <TextView
                             style="@style/TextAppearance.AppCompat.Light.SearchResult.Subtitle"
@@ -120,7 +128,8 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginVertical="20dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
                     android:orientation="horizontal">
 
                     <TextView
@@ -139,6 +148,7 @@
                         android:orientation="horizontal">
 
                         <TextView
+                            style="@style/TextAppearance.AppCompat.Light.SearchResult.Subtitle"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/best_possible_match_between_both_indicators"
@@ -165,7 +175,6 @@
                         style="@style/TextAppearance.AppCompat.Light.SearchResult.Subtitle"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginBottom="2dp"
                         android:text="@string/best_option"
                         android:textSize="18sp"
                         android:textStyle="bold|italic" />
@@ -174,7 +183,9 @@
                         android:id="@+id/bestOptionRv"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginVertical="3dp" />
+                        android:textColor="@color/black"
+                        tools:itemCount="1"
+                        tools:listitem="@layout/card_item_layout" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -182,9 +193,11 @@
                         android:orientation="vertical">
 
                         <TextView
+                            style="@style/TextAppearance.AppCompat.Light.SearchResult.Subtitle"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="@string/vin_ucn_relations_desc" />
+                            android:text="@string/vin_ucn_relations_desc"
+                            android:textSize="15sp" />
 
                         <LinearLayout
                             android:layout_width="match_parent"
@@ -202,47 +215,57 @@
                     </LinearLayout>
 
                 </LinearLayout>
+                <!-- Botones -->
+                <LinearLayout
+                    android:id="@+id/buttonLL"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginVertical="10dp"
+                    android:background="@android:color/transparent"
+                    android:baselineAligned="false"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_horizontal"
+                        tools:ignore="NestedWeights">
+
+                        <Button
+                            android:id="@+id/finish"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginHorizontal="10dp"
+                            android:gravity="center"
+                            android:text="@string/finish" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_horizontal">
+
+                        <ImageView
+                            android:id="@+id/donateButton"
+                            android:layout_width="match_parent"
+                            android:layout_height="38dp"
+                            android:layout_marginHorizontal="10dp"
+                            android:layout_marginBottom="5dp"
+                            android:adjustViewBounds="true"
+                            android:clickable="true"
+                            android:contentDescription="@string/desc"
+                            android:foreground="?attr/selectableItemBackgroundBorderless"
+                            android:scaleType="fitXY"
+                            android:src="@drawable/pay_as_you_wish_button_2" />
+                    </LinearLayout>
+
+                </LinearLayout>
             </LinearLayout>
         </ScrollView>
-
-        <!-- Botones -->
-        <LinearLayout
-            android:id="@+id/buttonLL"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@android:color/transparent"
-            android:baselineAligned="false"
-            android:gravity="center_horizontal"
-            android:orientation="horizontal">
-
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="center_horizontal"
-                tools:ignore="NestedWeights">
-
-                <Button
-                    android:id="@+id/finish"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/finish" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="center_horizontal">
-
-                <Button
-                    android:id="@+id/donateButton"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/pay_as_you_wish" />
-            </LinearLayout>
-
-        </LinearLayout>
 
     </LinearLayout>
 

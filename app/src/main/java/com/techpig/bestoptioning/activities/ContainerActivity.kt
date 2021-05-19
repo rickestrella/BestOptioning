@@ -13,9 +13,6 @@ import android.view.WindowManager
 import android.widget.FrameLayout
 import android.widget.Toast
 import androidx.core.content.res.ResourcesCompat
-import com.android.billingclient.api.BillingClient
-import com.android.billingclient.api.BillingClientStateListener
-import com.android.billingclient.api.BillingResult
 import com.ismaeldivita.chipnavigation.BuildConfig
 import com.ismaeldivita.chipnavigation.ChipNavigationBar
 import com.techpig.bestoptioning.R
@@ -31,9 +28,9 @@ class ContainerActivity : BaseActivity() {
     private var aClass: Class<*>? = null
     private var frag = ""
 
-
     companion object {
         lateinit var chipNavBar: ChipNavigationBar
+
         @SuppressLint("StaticFieldLeak")
         lateinit var frame_layout: FrameLayout
     }
@@ -44,7 +41,8 @@ class ContainerActivity : BaseActivity() {
 
         chipNavBar = findViewById(R.id.chipNavBar)
 
-        window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
+        //Keep screen on
+//        window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
 
         frame_layout = findViewById(R.id.frameLayout)
 
@@ -55,6 +53,7 @@ class ContainerActivity : BaseActivity() {
                 chipNavBar.background =
                     ResourcesCompat.getDrawable(resources, R.drawable.chip_night, null)
             }
+
             Configuration.UI_MODE_NIGHT_NO -> {
                 frame_layout.setBackgroundColor(Color.parseColor("#F3F3F3"))
                 chipNavBar.setMenuResource(R.menu.bottom_bar_menu)
@@ -108,15 +107,15 @@ class ContainerActivity : BaseActivity() {
             val fragment: androidx.fragment.app.Fragment =
                 aClass!!.newInstance() as androidx.fragment.app.Fragment
             //Open Fragment
+            supportFragmentManager.beginTransaction()
+                .setCustomAnimations(android.R.anim.fade_in, android.R.anim.fade_out)
+                .replace(R.id.frameLayout, fragment).addToBackStack(frag).commit()
             if (aClass == AddVehicleFragment::class.java) {
                 supportFragmentManager.beginTransaction()
                     .setCustomAnimations(android.R.anim.fade_in, android.R.anim.fade_out)
                     .replace(R.id.frameLayout, fragment).commit()
-            } else {
-                supportFragmentManager.beginTransaction()
-                    .setCustomAnimations(android.R.anim.fade_in, android.R.anim.fade_out)
-                    .replace(R.id.frameLayout, fragment).addToBackStack(frag).commit()
             }
+
         } catch (e: IllegalAccessException) {
             e.printStackTrace()
         } catch (e: InstantiationException) {
@@ -128,14 +127,14 @@ class ContainerActivity : BaseActivity() {
         if (backPressedTime + 2000 > System.currentTimeMillis()) {
             finish()
             exitProcess(0)
-        } else {
-            Toast.makeText(
-                applicationContext,
-                "Press back again to exit the app",
-                Toast.LENGTH_SHORT
-            )
-                .show()
         }
+        Toast.makeText(
+            applicationContext,
+            "Press back again to exit the app",
+            Toast.LENGTH_SHORT
+        )
+            .show()
+
         backPressedTime = System.currentTimeMillis()
     }
 

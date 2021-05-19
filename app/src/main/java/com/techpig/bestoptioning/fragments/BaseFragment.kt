@@ -1,17 +1,13 @@
 package com.techpig.bestoptioning.fragments
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import com.techpig.bestoptioning.R
-import kotlinx.android.synthetic.main.fragment_add_vehicle.*
 import java.text.DecimalFormat
 import java.util.*
-import kotlin.math.pow
 
 open class BaseFragment : Fragment() {
 

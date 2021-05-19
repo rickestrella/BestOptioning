@@ -5,18 +5,17 @@ import android.content.Intent
 import android.content.res.Configuration
 import android.graphics.Color
 import android.os.Bundle
+import android.text.Html
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.FrameLayout
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.*
+import androidx.core.content.res.ResourcesCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.techpig.bestoptioning.R
 import com.techpig.bestoptioning.activities.HomeActivity
-import com.techpig.bestoptioning.activities.PurchaseActivity
+import com.techpig.bestoptioning.activities.SupportActivity
 import com.techpig.bestoptioning.adapters.BestBetAdapter
 import com.techpig.bestoptioning.adapters.BestChoiceAdapter
 import com.techpig.bestoptioning.adapters.BestOptionAdapter
@@ -41,11 +40,13 @@ class ResultFragment : BaseFragment() {
 
     lateinit var result_layout: FrameLayout
     lateinit var bpmScore: TextView
-    lateinit var donateButton: Button
+    lateinit var donateButton: ImageView
     lateinit var finish: Button
     lateinit var bestChoiceRv: RecyclerView
     lateinit var bestBetRv: RecyclerView
     lateinit var bestOptionRv: RecyclerView
+
+    lateinit var vii_text: TextView
 
 
     lateinit var v: View
@@ -64,6 +65,7 @@ class ResultFragment : BaseFragment() {
         bestChoiceRv = v.findViewById(R.id.bestChoiceRv)
         bestBetRv = v.findViewById(R.id.bestBetRv)
         bestOptionRv = v.findViewById(R.id.bestOptionRv)
+        vii_text = v.findViewById(R.id.viindicatorTv)
 
         when (context?.resources!!.configuration.uiMode.and(Configuration.UI_MODE_NIGHT_MASK)) {
             Configuration.UI_MODE_NIGHT_YES -> result_layout.setBackgroundColor(Color.parseColor("#141414"))
@@ -78,6 +80,20 @@ class ResultFragment : BaseFragment() {
         boBpr = bpm
         getBOName()
 
+//        if(vii_text.text.contains("VII")) {
+//            vii_text.text.replace("VII", Html.toHtml("<strong>VII</<strong>", 0))
+//        }
+
+        if (Locale.getDefault().displayLanguage == Locale.getDefault()
+                .getDisplayLanguage(Locale.forLanguageTag("es"))
+        ) {
+            finish.layoutParams.width = 850
+            finish.requestLayout()
+        } else {
+            finish.layoutParams.width = 650
+            finish.requestLayout()
+        }
+
         finish.setOnClickListener {
             Vehicle.removeVehicle()
             val i = Intent(context, HomeActivity::class.java)
@@ -89,10 +105,22 @@ class ResultFragment : BaseFragment() {
             ).show()
         }
 
+        if (Locale.getDefault().displayLanguage == Locale.getDefault()
+                .getDisplayLanguage(Locale.forLanguageTag("es"))
+        ) {
+            donateButton.setImageDrawable(ResourcesCompat.getDrawable(resources, R.drawable.pon, null))
+//            donateButton.setImageDrawable(resources.getDrawable(R.drawable.pon_2))
+            donateButton.layoutParams.width = 850
+            donateButton.requestLayout()
+        } else {
+            donateButton.layoutParams.width = 650
+            donateButton.requestLayout()
+            donateButton.setImageDrawable(ResourcesCompat.getDrawable(resources, R.drawable.pay_as_you_wish_button, null))
+//            donateButton.setImageDrawable(resources.getDrawable(R.drawable.pay_as_you_wish_button_2))
+        }
 
         donateButton.setOnClickListener {
-//            billingDialog()
-            startActivity(Intent(requireActivity(), PurchaseActivity::class.java))
+            startActivity(Intent(requireActivity(), SupportActivity::class.java))
         }
 
         popDialog()
@@ -119,6 +147,16 @@ class ResultFragment : BaseFragment() {
             .addSizes(Size(12))
             .setPosition(-20f, viewKonfetti.width + 20f, -20f, -50f)
             .burst(900)
+
+        val dialogTitle = alertLayout.findViewById<ImageView>(R.id.dialog_title)
+
+        if (Locale.getDefault().displayLanguage == Locale.getDefault()
+                .getDisplayLanguage(Locale.forLanguageTag("es"))
+        ) {
+            dialogTitle.setImageDrawable(resources.getDrawable(R.drawable.listo))
+        } else {
+            dialogTitle.setImageDrawable(resources.getDrawable(R.drawable.good_to_go))
+        }
 
         val dialogMM = alertLayout.findViewById<TextView>(R.id.dialog_model_make)
         dialogMM.text = boTitle
@@ -204,10 +242,8 @@ class ResultFragment : BaseFragment() {
                 if (abs(bestOptionList[i] - bpr) < abs(subtractResult)) {
                     subtractResult = abs(bestOptionList[i] - bpr)
                     closestValue = abs(bestOptionList[i])
-
                 }
             }
-
             return closestValue
         }
 

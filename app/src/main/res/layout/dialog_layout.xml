@@ -30,15 +30,13 @@
                 android:layout_height="match_parent"
                 android:padding="8dp">
 
-                <TextView
+                <ImageView
                     android:id="@+id/dialog_title"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
                     android:layout_marginTop="32dp"
-                    android:gravity="center_horizontal"
-                    android:text="@string/good_to_go"
-                    android:textSize="23sp"
-                    android:textStyle="bold" />
+                    android:contentDescription="@string/image" />
 
                 <LinearLayout
                     android:layout_width="match_parent"

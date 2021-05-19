@@ -11,9 +11,9 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.button.MaterialButton
 import com.techpig.bestoptioning.R
-import com.techpig.bestoptioning.models.Vehicle
-import com.techpig.bestoptioning.adapters.VehicleListAdapter
 import com.techpig.bestoptioning.activities.ContainerActivity.Companion.chipNavBar
+import com.techpig.bestoptioning.adapters.VehicleListAdapter
+import com.techpig.bestoptioning.models.Vehicle
 
 class ListVehicleFragment : Fragment() {
 
@@ -42,7 +42,9 @@ class ListVehicleFragment : Fragment() {
 
         addVButton.setOnClickListener {
             chipNavBar.setItemSelected(R.id.add_menu, true)
-            chipNavBar.setItemEnabled(R.id.add_menu, true)
+            if (Vehicle.vehicles.size < 5) {
+                chipNavBar.setItemEnabled(R.id.add_menu, true)
+            }
             chipNavBar.setItemEnabled(R.id.result_menu, false)
         }
 

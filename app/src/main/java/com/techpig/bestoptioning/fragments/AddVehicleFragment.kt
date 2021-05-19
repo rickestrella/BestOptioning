@@ -147,7 +147,6 @@ class AddVehicleFragment : BaseFragment() {
         )
         val editor = prefs!!.edit()
 
-
         months = arrayListOf(
             getString(R.string.january),
             getString(R.string.february),
@@ -233,7 +232,6 @@ class AddVehicleFragment : BaseFragment() {
                 mkYearInfoTv.setTextColor(Color.parseColor("#666666"))
                 mkEndInfoTv.setTextColor(Color.parseColor("#666666"))
                 manufacturingTv.setTextColor(Color.parseColor("#666666"))
-//                manufacturingTv.setTextColor(Color.parseColor("#362967"))
 
                 modelMake.boxBackgroundColor = Color.parseColor("#FFFFFF")
                 manufacturingYear.boxBackgroundColor = Color.parseColor("#FFFFFF")
@@ -328,20 +326,6 @@ class AddVehicleFragment : BaseFragment() {
                 llOtherCurrencies.visibility = View.GONE
                 price.visibility = View.VISIBLE
                 priceInfo.text = getString(R.string.costs)
-            }
-        }
-
-        //Remove trailing zeros
-        fun trimTrailingZero(value: String?): String? {
-            return if (!value.isNullOrEmpty()) {
-                if (value.indexOf(".") < 0) {
-                    value
-                } else {
-                    value.replace("0*$".toRegex(), "").replace("\\.$".toRegex(), "")
-                }
-
-            } else {
-                value
             }
         }
 
@@ -482,8 +466,8 @@ class AddVehicleFragment : BaseFragment() {
                 alert.setText(R.string.vehicle_added)
                 alert.setIcon(R.drawable.ic_done)
                 when (context?.resources!!.configuration.uiMode.and(Configuration.UI_MODE_NIGHT_MASK)) {
-                    Configuration.UI_MODE_NIGHT_YES -> alert.setBackgroundColorRes(R.color.green_hard)
-                    Configuration.UI_MODE_NIGHT_NO -> alert.setBackgroundColorRes(R.color.new_green)
+                    Configuration.UI_MODE_NIGHT_YES -> alert.setBackgroundColorRes(R.color.green_whatsapp)
+                    Configuration.UI_MODE_NIGHT_NO -> alert.setBackgroundColorRes(R.color.green_whatsapp)
                 }
                 alert.setDuration(1000)
                 alert.enableSwipeToDismiss()
@@ -491,9 +475,7 @@ class AddVehicleFragment : BaseFragment() {
                 chipNavBar.setItemSelected(R.id.list_menu, true)
             }
 
-            val unitPicked = unitPicker.editText!!.text.toString()
-
-            when (unitPicked) {
+            when (unitPicker.editText!!.text.toString()) {
                 getString(R.string.km) -> {
                     editor!!.putString(Constants.READING_UNIT, getString(R.string.km))
                     editor.apply()
@@ -505,7 +487,6 @@ class AddVehicleFragment : BaseFragment() {
             }
 
         }
-
         cancelButton.setOnClickListener {
             if (Vehicle.vehicles.size == 0) {
                 activity?.finish()
@@ -528,23 +509,13 @@ class AddVehicleFragment : BaseFragment() {
         modelMake: String, selectedMonth: Long, selectedYear: Long,
         odometerReading: Int, price: Double, mkYearly: Int, mkEnd: Int
     ) {
-
         if (CHOSEN_CURRENCY == 2 || prefs!!.getInt(Constants.CHOSEN_CURRENCY, 0) == 2) {
             putSavedCurrency(
                 vPE.editableText.toString().toFloat(),
                 vehiclePriceOtherCurrency.toFloat()
             )
         }
-
-//        if (llOtherCurrencies.isVisible) {
-
-//            getVin(vehicleInMonths(), odometerReadEt, 0f, newPriceET, equivalenceET)
-//        } else {
-//            getVin(vehicleInMonths(), odometerReadEt, priceET, 0f, 0f)
-//        }
-
         vin()
-
         ucn_value = ucn(
             replaceSymboltoInt(odometerReading.toString()),
             replaceSymbol(price.toString()).toDouble(),
@@ -587,15 +558,15 @@ class AddVehicleFragment : BaseFragment() {
         )
     }
 
-    private fun currencyConverter(equivalenc: Float, priceNew: Long): Double {
-        return if (equivalenc >= 1) {
-            (priceNew / equivalenc).toDouble()
+    private fun currencyConverter(equivalence: Float, priceNew: Long): Double {
+        return if (equivalence >= 1) {
+            (priceNew / equivalence).toDouble()
         } else {
-            (priceNew * equivalenc).toDouble()
+            (priceNew * equivalence).toDouble()
         }
     }
 
-    private fun putSavedCurrency(thisPrice: Float, equivalenc: Float): Double {
+    private fun putSavedCurrency(thisPrice: Float, equivalence: Float): Double {
         var savedValue = 0.0
         val editor = prefs!!.edit()
 
@@ -604,10 +575,10 @@ class AddVehicleFragment : BaseFragment() {
         ) {
             editor.putFloat(Constants.SAVED_CURRENCY, replaceSymbol(vehiclePriceEquivalence))
             editor.apply()
-            return currencyConverter(equivalenc, thisPrice.toLong())
+            return currencyConverter(equivalence, thisPrice.toLong())
         }
         if (prefs!!.getFloat(Constants.SAVED_CURRENCY, 0f).toString().isNotEmpty()) {
-            savedValue = currencyConverter(equivalenc, thisPrice.toLong())
+            savedValue = currencyConverter(equivalence, thisPrice.toLong())
         }
         return savedValue
     }
@@ -708,10 +679,11 @@ class AddVehicleFragment : BaseFragment() {
                 .isNotEmpty() && manufacturingYear.editText!!.toString()
                 .isNotEmpty() && odometerRead.editText!!.text.isNotEmpty()
         ) {
-            if (llOtherCurrencies.visibility == View.GONE && price.editText!!.text.isNotEmpty()) {
-                fieldEmpty = false
-                if (price.editText?.text!!.isEmpty()) {
+            if (llOtherCurrencies.visibility == View.GONE) {
+                if (price.editText?.text!!.toString().isEmpty() || price_et.text.toString().trim { it <= ' ' }.isEmpty()) {
                     price.requestFocus()
+                    price_et.requestFocus()
+                    price_et.error
                     price.error
                     val alert = Alerter.create(requireActivity())
                     alert.setTitle(getString(R.string.error))
@@ -725,39 +697,46 @@ class AddVehicleFragment : BaseFragment() {
                     alert.enableSwipeToDismiss()
                     alert.show()
                     frame_layout.animation = shake
+                } else {
+                    fieldEmpty = false
                 }
-            } else if (llOtherCurrencies.visibility == View.VISIBLE && price_new.editText!!.text.isNotEmpty() && equivalencia.editText!!.text.isNotEmpty()) {
-                fieldEmpty = false
-                if (price_new.editText?.text!!.isEmpty()) {
-                    price_new.requestFocus()
-                    price_new.error
-                    val alert = Alerter.create(requireActivity())
-                    alert.setTitle(getString(R.string.error))
-                    alert.setText(getString(R.string.provide_price))
-                    alert.setIcon(R.drawable.ic_error)
-                    when (context?.resources!!.configuration.uiMode.and(Configuration.UI_MODE_NIGHT_MASK)) {
-                        Configuration.UI_MODE_NIGHT_YES -> alert.setBackgroundColorRes(R.color.crimson)
-                        Configuration.UI_MODE_NIGHT_NO -> alert.setBackgroundColorRes(R.color.crimson_day)
+            } else if (llOtherCurrencies.visibility == View.VISIBLE) {
+                when {
+                    price_new.editText?.text!!.isEmpty() -> {
+                        price_new.requestFocus()
+                        price_new.error
+                        val alert = Alerter.create(requireActivity())
+                        alert.setTitle(getString(R.string.error))
+                        alert.setText(getString(R.string.provide_price))
+                        alert.setIcon(R.drawable.ic_error)
+                        when (context?.resources!!.configuration.uiMode.and(Configuration.UI_MODE_NIGHT_MASK)) {
+                            Configuration.UI_MODE_NIGHT_YES -> alert.setBackgroundColorRes(R.color.crimson)
+                            Configuration.UI_MODE_NIGHT_NO -> alert.setBackgroundColorRes(R.color.crimson_day)
+                        }
+                        alert.setDuration(3000)
+                        alert.enableSwipeToDismiss()
+                        alert.show()
+                        frame_layout.animation = shake
                     }
-                    alert.setDuration(3000)
-                    alert.enableSwipeToDismiss()
-                    alert.show()
-                    frame_layout.animation = shake
-                } else if (equivalencia.editText?.text!!.isEmpty()) {
-                    equivalencia.requestFocus()
-                    equivalencia.error
-                    val alert = Alerter.create(requireActivity())
-                    alert.setTitle(getString(R.string.error))
-                    alert.setText(getString(R.string.provide_equivalence))
-                    alert.setIcon(R.drawable.ic_error)
-                    when (context?.resources!!.configuration.uiMode.and(Configuration.UI_MODE_NIGHT_MASK)) {
-                        Configuration.UI_MODE_NIGHT_YES -> alert.setBackgroundColorRes(R.color.crimson)
-                        Configuration.UI_MODE_NIGHT_NO -> alert.setBackgroundColorRes(R.color.crimson_day)
+                    equivalencia.editText?.text!!.isEmpty() -> {
+                        equivalencia.requestFocus()
+                        equivalencia.error
+                        val alert = Alerter.create(requireActivity())
+                        alert.setTitle(getString(R.string.error))
+                        alert.setText(getString(R.string.provide_equivalence))
+                        alert.setIcon(R.drawable.ic_error)
+                        when (context?.resources!!.configuration.uiMode.and(Configuration.UI_MODE_NIGHT_MASK)) {
+                            Configuration.UI_MODE_NIGHT_YES -> alert.setBackgroundColorRes(R.color.crimson)
+                            Configuration.UI_MODE_NIGHT_NO -> alert.setBackgroundColorRes(R.color.crimson_day)
+                        }
+                        alert.setDuration(4500)
+                        alert.enableSwipeToDismiss()
+                        alert.show()
+                        frame_layout.animation = shake
                     }
-                    alert.setDuration(4500)
-                    alert.enableSwipeToDismiss()
-                    alert.show()
-                    frame_layout.animation = shake
+                    else -> {
+                        fieldEmpty = false
+                    }
                 }
             }
         } else {
@@ -851,6 +830,7 @@ class AddVehicleFragment : BaseFragment() {
         val pickedYear = manufacturingYear.editText!!.text.toString().toInt()
         val pickedMonth = monthPicker.editText!!.text.toString()
         val deviceYear = currentDate.year
+
         val deviceMonth = when (Locale.getDefault().displayLanguage) {
             Locale.getDefault().getDisplayLanguage(Locale.forLanguageTag("es")) -> {
                 monthTranslator(currentDate.month.toString())
@@ -859,6 +839,7 @@ class AddVehicleFragment : BaseFragment() {
                 currentDate.month
             }
         }
+
         return ((deviceYear * 12) + monthNumber(deviceMonth.toString())) -
                 ((pickedYear * 12) + monthNumber(pickedMonth))
     }

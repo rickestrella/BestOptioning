@@ -28,10 +28,13 @@ class VehicleListAdapter(val context: Context, private val items: ArrayList<Vehi
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return if ((context.applicationContext!!.resources.configuration.uiMode.and(Configuration.UI_MODE_NIGHT_MASK)) == Configuration.UI_MODE_NIGHT_YES) {
             ViewHolder(
-                LayoutInflater.from(context).inflate(R.layout.vehicles_list_layout_night, parent, false))
+                LayoutInflater.from(context)
+                    .inflate(R.layout.vehicles_list_layout_night, parent, false)
+            )
         } else {
             ViewHolder(
-                LayoutInflater.from(context).inflate(R.layout.vehicles_list_layout, parent, false))
+                LayoutInflater.from(context).inflate(R.layout.vehicles_list_layout, parent, false)
+            )
         }
     }
 
@@ -68,6 +71,9 @@ class VehicleListAdapter(val context: Context, private val items: ArrayList<Vehi
             addVButton.isEnabled = items.size < 5
             if (items.size >= 1) {
                 chipNavBar.setItemEnabled(R.id.list_menu, true)
+            }
+            if (items.size < 5) {
+                chipNavBar.setItemEnabled(R.id.add_menu, true)
             }
         }
         addVButton.isEnabled = items.size < 5

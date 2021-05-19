@@ -5,6 +5,7 @@ import android.content.res.Configuration
 import android.graphics.Color
 import android.graphics.Typeface
 import android.text.TextUtils
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -51,16 +52,22 @@ class BestChoiceAdapter(val context: Context, val items: ArrayList<VehicleObject
             return df.format(number.toDouble()).toFloat()
         }
 
+        val df = DecimalFormat("####.####")
+
         holder.cardTitle.text = item.getModelMake()
         holder.cardTitle.isSelected = true
         holder.cardTitle.setSingleLine()
         holder.cardTitle.ellipsize = TextUtils.TruncateAt.MARQUEE
+
+        val value = BaseFragment().replaceSymbol(item.getVin().toString())
+        val spanishValue = df.format(value).toString()
+
         val cardScoreFourDigits = if (Locale.getDefault().displayLanguage == Locale.getDefault()
                 .getDisplayLanguage(
                     Locale.forLanguageTag("es")
                 )
         ) {
-            formatNumber(BaseFragment().replaceSymbol(item.getVin().toString())).toString()
+            spanishValue
         } else {
             formatNumber(item.getVin()).toString()
         }

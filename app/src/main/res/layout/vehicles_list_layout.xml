@@ -10,7 +10,7 @@
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:cardBackgroundColor="#66A930"
+        app:cardBackgroundColor="#00BFA5"
         app:cardCornerRadius="8dp">
 
         <LinearLayout
@@ -47,25 +47,25 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textColor="#000000"
-                        android:textSize="13sp" />
+                        android:textSize="16sp" />
 
                     <TextView
                         android:id="@+id/vehicleListOdometerRead"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginHorizontal="50dp"
-                        android:layout_weight="2.3"
+                        android:layout_weight="2.7"
                         android:gravity="center"
                         android:textColor="#000000"
-                        android:textSize="13sp" />
+                        android:textSize="16sp" />
 
                     <TextView
                         android:id="@+id/vehicleListPrice"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_weight="2"
+                        android:layout_weight="3"
                         android:textColor="#000000"
-                        android:textSize="13sp" />
+                        android:textSize="16sp" />
                 </LinearLayout>
 
             </LinearLayout>
